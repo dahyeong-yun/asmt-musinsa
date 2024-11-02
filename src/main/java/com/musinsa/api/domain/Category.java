@@ -14,6 +14,7 @@ public enum Category {
     ACCESSORY("액세서리");
 
     private final String korean;
+    // TODO 정렬 순서 필요 여부 검토
 
     Category(String korean) {
         this.korean = korean;

@@ -32,10 +32,13 @@ public class Item {
         return category.getKorean();
     }
 
-    public String getItemPrice() {
-        return price.getPrice().toString();
+    public String getItemFormattedPrice() {
+        return price.toFormattedString();
     }
 
+    public BigDecimal getItemPrice() {
+        return price.getPrice();
+    }
 
     public static Item create(Brand brand, Category category, ItemPrice price) {
         return Item.builder()

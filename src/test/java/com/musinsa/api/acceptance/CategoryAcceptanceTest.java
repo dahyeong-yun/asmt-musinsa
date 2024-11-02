@@ -1,5 +1,6 @@
 package com.musinsa.api.acceptance;
 
+import com.musinsa.api.domain.Category;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -8,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,11 +33,20 @@ public class CategoryAcceptanceTest {
         ExtractableResponse<Response> 최저가_조합_브랜드_조회_응답 = 최저가_조합_브랜드_조회_요청();
         String brandName = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("brandName");
         String totalPrice = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("totalPrice");
+        List<Map<String, String>> categories = 최저가_조합_브랜드_조회_응답.body().jsonPath().getList("categories");
 
         // then
         assertThat(최저가_조합_브랜드_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(brandName).isEqualTo("테스트");
         assertThat(totalPrice).isEqualTo("10000");
+        assertThat(categories.get(0)).containsEntry("categoryName", Category.TOP.getKorean());
+        assertThat(categories.get(1)).containsEntry("categoryName", Category.OUTER.getKorean());
+        assertThat(categories.get(2)).containsEntry("categoryName", Category.PANTS.getKorean());
+        assertThat(categories.get(3)).containsEntry("categoryName", Category.SNEAKERS.getKorean());
+        assertThat(categories.get(4)).containsEntry("categoryName", Category.BAG.getKorean());
+        assertThat(categories.get(5)).containsEntry("categoryName", Category.CAP.getKorean());
+        assertThat(categories.get(6)).containsEntry("categoryName", Category.SOCKS.getKorean());
+        assertThat(categories.get(7)).containsEntry("categoryName", Category.ACCESSORY.getKorean());
     }
 
 

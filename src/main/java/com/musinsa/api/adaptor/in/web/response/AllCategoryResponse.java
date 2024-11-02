@@ -21,7 +21,7 @@ public class AllCategoryResponse {
                 items.stream()
                         .map(item -> ItemResponse.builder()
                                 .categoryName(item.getItemCategoryName())
-                                .price(item.getItemPrice())
+                                .price(item.getItemFormattedPrice())
                                 .build())
                         .collect(Collectors.toList());
         return new AllCategoryResponse(

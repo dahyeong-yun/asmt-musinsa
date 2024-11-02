@@ -42,9 +42,15 @@ public class itemService implements
 
         Brand brand = Brand.builder().brandName("테스트").businessNumber("23").build();
         return List.of(
-                Item.of(brand, Category.ACCESSORY, "10000"),
-                Item.of(brand, Category.BAG, "20000"),
-                Item.of(brand, Category.OUTER, "30000")
+                Item.of(brand, Category.TOP, "10000"),
+                Item.of(brand, Category.OUTER, "30000"),
+                Item.of(brand, Category.PANTS, "10000"),
+                Item.of(brand, Category.SNEAKERS, "10000"),
+                Item.of(brand, Category.BAG, "10000"),
+                Item.of(brand, Category.CAP, "10000"),
+                Item.of(brand, Category.SOCKS, "10000"),
+                Item.of(brand, Category.ACCESSORY, "20000")
         );
+        // TODO items 를 객체로 변경 하여 최저가를 구하는 로직을 포함 시키는 것이 좋을 것 같음
     }
 }
