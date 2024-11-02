@@ -21,7 +21,7 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-
+// TODO
     }
 
     /**

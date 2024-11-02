@@ -19,7 +19,6 @@ public class BrandEntity {
     @Column(nullable = false)
     private String businessNumber;
 
-    // 또는 정적 팩토리 메소드로 구현
     public static BrandEntity from(Brand brand) {
         BrandEntity entity = new BrandEntity();
         entity.id = brand.getId();
