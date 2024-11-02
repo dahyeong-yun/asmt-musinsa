@@ -28,7 +28,7 @@ public class LowestPricesBrandMixResponse {
                         .collect(Collectors.toList());
         return new LowestPricesBrandMixResponse(
                 categories,
-                "10000"
+                allCategoryItems.getTotalPrice()
         );
     }
 

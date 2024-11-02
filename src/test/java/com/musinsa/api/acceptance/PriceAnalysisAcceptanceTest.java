@@ -2,14 +2,12 @@ package com.musinsa.api.acceptance;
 
 import com.musinsa.api.config.AbstractAcceptanceTest;
 import com.musinsa.api.domain.Category;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
 import java.util.List;
 import java.util.Map;
@@ -64,10 +62,16 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
     /**
      * Given 브랜드가 1개 이상 등록되어 있고,
      * And 브랜드 별로 모든 카테고리의 상품이 1개 이상 등록되어 있을 때
-     * When 특정 카테고리의 최저가 및 최고가 상품을 조회하면
+     * When 각 카테고리 별 최저가 상품을 조회하면
      * Then 조회할 수 있다.
      */
-    void findLowestAndHighestBrandPrices() {
+    @Test
+    @DisplayName("특정 카테고리의 최저가 및 최고가 상품을 조회할 수 있다.")
+    void findLowestPricesBrandMix() {
+        // given
+        // TODO 브랜드 등록
+        // TODO 카테고리별 상품 등록
+
         // when
         ExtractableResponse<Response> 최저가_조합_브랜드_조회_응답 = 최저가_브랜드_조합_조회_요청();
         String totalPrice = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("totalPrice");
@@ -75,10 +79,8 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
         // then
         assertThat(최저가_조합_브랜드_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(totalPrice).isEqualTo("10000");
+        assertThat(totalPrice).isEqualTo("34,100");
         assertThat(categories.get(0)).containsEntry("categoryName", Category.TOP.getKorean());
-        assertThat(categories.get(0)).containsEntry("categoryName", Category.TOP.getKorean());
-        assertThat(categories.get(1)).containsEntry("categoryName", Category.OUTER.getKorean());
         assertThat(categories.get(1)).containsEntry("categoryName", Category.OUTER.getKorean());
         assertThat(categories.get(2)).containsEntry("categoryName", Category.PANTS.getKorean());
         assertThat(categories.get(3)).containsEntry("categoryName", Category.SNEAKERS.getKorean());
@@ -86,6 +88,34 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
         assertThat(categories.get(5)).containsEntry("categoryName", Category.CAP.getKorean());
         assertThat(categories.get(6)).containsEntry("categoryName", Category.SOCKS.getKorean());
         assertThat(categories.get(7)).containsEntry("categoryName", Category.ACCESSORY.getKorean());
+
+        assertThat(categories.get(0)).containsEntry("brandName", "C");
+        assertThat(categories.get(1)).containsEntry("brandName", "E");
+        assertThat(categories.get(2)).containsEntry("brandName", "D");
+        assertThat(categories.get(3)).containsEntry("brandName", "G");
+        assertThat(categories.get(4)).containsEntry("brandName", "A");
+        assertThat(categories.get(5)).containsEntry("brandName", "D");
+        assertThat(categories.get(6)).containsEntry("brandName", "I");
+        assertThat(categories.get(7)).containsEntry("brandName", "F");
+
+        assertThat(categories.get(0)).containsEntry("price", "10,000");
+        assertThat(categories.get(1)).containsEntry("price", "5,000");
+        assertThat(categories.get(2)).containsEntry("price", "3,000");
+        assertThat(categories.get(3)).containsEntry("price", "9,000");
+        assertThat(categories.get(4)).containsEntry("price", "2,000");
+        assertThat(categories.get(5)).containsEntry("price", "1,500");
+        assertThat(categories.get(6)).containsEntry("price", "1,700");
+        assertThat(categories.get(7)).containsEntry("price", "1,900");
     }
 
+    /**
+     * Given 브랜드가 1개 이상 등록되어 있고,
+     * And 브랜드 별로 모든 카테고리의 상품이 1개 이상 등록되어 있을 때
+     * When 특정 카테고리의 최저가 및 최고가 상품을 조회하면
+     * Then 조회할 수 있다.
+     */
+    @DisplayName("특정 카테고리의 최저가 및 최고가 상품을 조회할 수 있다.")
+    void findLowestAndHighestBrandPrices() {
+
+    }
 }

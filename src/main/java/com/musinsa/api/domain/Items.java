@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -32,5 +33,13 @@ public class Items {
         return items.stream()
                 .max(Comparator.comparing(Item::getItemPrice))
                 .orElseThrow();
+    }
+
+    public String getTotalPrice() {
+        BigDecimal totalPrice = items.stream()
+                .map(Item::getItemPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        ItemPrice itemsPrice = ItemPrice.create(totalPrice);
+        return itemsPrice.toFormattedString();
     }
 }

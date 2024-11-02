@@ -57,15 +57,15 @@ public class itemService implements
     public Items findLowestPricesBrandMix() {
         Items items = Items.create();
 
-        Brand adidas = Brand.builder().brandName("테스트").businessNumber("23").build();
-        Brand balenciaga = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand calvinKlein = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand dior = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand escada = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand fendi = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand gucci = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand hummel = Brand.builder().brandName("테스트").businessNumber("24").build();
-        Brand ironman = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand adidas = Brand.builder().brandName("A").businessNumber("23").build();
+        Brand balenciaga = Brand.builder().brandName("B").businessNumber("24").build();
+        Brand calvinKlein = Brand.builder().brandName("C").businessNumber("24").build();
+        Brand dior = Brand.builder().brandName("D").businessNumber("24").build();
+        Brand escada = Brand.builder().brandName("E").businessNumber("24").build();
+        Brand fendi = Brand.builder().brandName("F").businessNumber("24").build();
+        Brand gucci = Brand.builder().brandName("G").businessNumber("24").build();
+        Brand hummel = Brand.builder().brandName("H").businessNumber("24").build();
+        Brand ironman = Brand.builder().brandName("I").businessNumber("24").build();
 
         List<Item> findItems = List.of(
                 Item.of(calvinKlein, Category.TOP, "10000"),
