@@ -5,7 +5,6 @@ import com.musinsa.api.adaptor.in.web.response.BrandRetrieveResponse;
 import com.musinsa.api.application.port.in.BrandCreateUseCase;
 import com.musinsa.api.application.port.in.BrandDeleteUseCase;
 import com.musinsa.api.application.port.in.BrandRetrieveUseCase;
-import com.musinsa.api.application.port.in.LowestCategoryPricesUseCase;
 import com.musinsa.api.domain.Brand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

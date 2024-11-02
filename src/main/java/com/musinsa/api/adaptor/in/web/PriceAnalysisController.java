@@ -1,8 +1,10 @@
 package com.musinsa.api.adaptor.in.web;
 
+import com.musinsa.api.adaptor.in.web.response.LowestPricesBrandMixResponse;
 import com.musinsa.api.adaptor.in.web.response.LowestPricesOneBrandResponse;
 import com.musinsa.api.adaptor.in.web.response.CategoryResponse;
-import com.musinsa.api.application.port.in.LowestCategoryPricesUseCase;
+import com.musinsa.api.application.port.in.LowestPricesRetrieveUseCase;
+import com.musinsa.api.domain.CategoryItems;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PriceAnalysisController {
 
-    private final LowestCategoryPricesUseCase lowestCategoryPricesUseCase;
+    private final LowestPricesRetrieveUseCase lowestPricesRetrieveUseCase;
 
     @GetMapping("/brands/lowest-prices")
     public ResponseEntity lowestPricesOneBrand() {
-        var items = lowestCategoryPricesUseCase.findLowestPricesItemsByBrand();
+        var items = lowestPricesRetrieveUseCase.findLowestPricesOneBrand();
         var response = LowestPricesOneBrandResponse.of(items);
         return ResponseEntity
                 .ok()
@@ -28,8 +30,8 @@ public class PriceAnalysisController {
 
     @GetMapping("/brands/lowest-prices-combination")
     public ResponseEntity lowestPricesBrandMix() {
-        var items = lowestCategoryPricesUseCase.findLowestPricesItemsByBrand();
-        var response = LowestPricesOneBrandResponse.of(items);
+        var items = lowestPricesRetrieveUseCase.findLowestPricesBrandMix();
+        var response = LowestPricesBrandMixResponse.of(items);
         return ResponseEntity
                 .ok()
                 .body(response);
@@ -37,7 +39,8 @@ public class PriceAnalysisController {
 
     @GetMapping("/categories/{categoryName}/lowest-highest-prices")
     public ResponseEntity lowestAndHighestBrandPrices(@PathVariable String categoryName) {
-        var response = CategoryResponse.toResponse(categoryName); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
+        CategoryItems categoryItems = lowestPricesRetrieveUseCase.findLowestPricesAtCategory(categoryName);
+        var response = CategoryResponse.toResponse(categoryItems); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
         return ResponseEntity
                 .ok()
                 .body(response);

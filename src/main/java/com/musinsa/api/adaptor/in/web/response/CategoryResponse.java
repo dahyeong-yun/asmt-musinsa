@@ -1,5 +1,7 @@
 package com.musinsa.api.adaptor.in.web.response;
 
+import com.musinsa.api.domain.CategoryItems;
+import com.musinsa.api.domain.Items;
 import lombok.*;
 
 import java.util.List;
@@ -10,9 +12,10 @@ public class CategoryResponse {
     private List<ItemResponse> lowestPrice;
     private List<ItemResponse> highestPrice;
 
-    public static CategoryResponse toResponse(String categoryName) {
+    public static CategoryResponse toResponse(CategoryItems categoryItems) {
+
         return CategoryResponse.builder()
-                .categoryName(categoryName)
+                .categoryName(categoryItems.getCategoryName())
                 .lowestPrice(List.of(ItemResponse.builder().brandName("C").price("10,000").build()))
                 .highestPrice(List.of(ItemResponse.builder().brandName("I").price("11,400").build()))
                 .build();

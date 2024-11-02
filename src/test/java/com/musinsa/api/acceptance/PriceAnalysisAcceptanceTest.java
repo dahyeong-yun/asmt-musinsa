@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 // 초기화 -> 테스트 격리
-@DisplayName("카테고리 관련 기능")
-public class CategoryAcceptanceTest {
+@DisplayName("가격 조회 관련 기능")
+public class PriceAnalysisAcceptanceTest {
 
     /**
      * Given 브랜드가 1개 이상 등록되어 있고,
@@ -49,7 +49,6 @@ public class CategoryAcceptanceTest {
         assertThat(categories.get(7)).containsEntry("categoryName", Category.ACCESSORY.getKorean());
     }
 
-
     /**
      * Given 브랜드가 1개 이상 등록되어 있고,
      * And 브랜드 별로 모든 카테고리의 상품이 1개 이상 등록되어 있을 때
@@ -59,6 +58,9 @@ public class CategoryAcceptanceTest {
     void findLowestAndHighestBrandPrices() {
         // when
     }
+
+
+
 
     private ExtractableResponse<Response> 최저가_조합_브랜드_조회_요청() {
         return RestAssured.given().log().all()
