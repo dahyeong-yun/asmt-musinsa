@@ -3,7 +3,7 @@ package com.musinsa.api.application;
 import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
-import com.musinsa.api.application.port.in.LowestPricesRetrieveUseCase;
+import com.musinsa.api.application.port.in.PricesRetrieveUseCase;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.*;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 public class itemService implements
         ItemRetrieveUseCase,
         ItemCreateUseCase,
-        LowestPricesRetrieveUseCase {
+        PricesRetrieveUseCase {
 
     private final ItemOutputPort itemOutputPort;
 
@@ -59,7 +59,7 @@ public class itemService implements
     }
 
     @Override
-    public CategoryItems findLowestPricesAtCategory(String categoryName) {
+    public CategoryItems findLowestAndHighestPricesAtCategory(String categoryName) {
         return null;
     }
 }

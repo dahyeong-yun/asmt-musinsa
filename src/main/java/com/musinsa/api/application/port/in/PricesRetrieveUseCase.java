@@ -3,10 +3,10 @@ package com.musinsa.api.application.port.in;
 import com.musinsa.api.domain.AllCategoryItems;
 import com.musinsa.api.domain.CategoryItems;
 
-public interface LowestPricesRetrieveUseCase {
+public interface PricesRetrieveUseCase {
     AllCategoryItems findLowestPricesOneBrand();
 
     AllCategoryItems findLowestPricesBrandMix();
 
-    CategoryItems findLowestPricesAtCategory(String categoryName);
+    CategoryItems findLowestAndHighestPricesAtCategory(String categoryName);
 }
