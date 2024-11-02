@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class AllCategoryResponse {
+public class LowestPricesOneBrandResponse {
     private String brandName;
     private List<ItemResponse> categories;
     private String totalPrice;
 
-    public static AllCategoryResponse of(List<Item> items) {
+    public static LowestPricesOneBrandResponse of(List<Item> items) {
         // items price 의 sum => totalPrice
         // items map => categories
         List<ItemResponse> categories =
@@ -24,7 +24,7 @@ public class AllCategoryResponse {
                                 .price(item.getItemFormattedPrice())
                                 .build())
                         .collect(Collectors.toList());
-        return new AllCategoryResponse(
+        return new LowestPricesOneBrandResponse(
                 items.getFirst().getItemBrandName(),
                 categories,
                 "10000"

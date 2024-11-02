@@ -62,7 +62,14 @@ public class CategoryAcceptanceTest {
 
     private ExtractableResponse<Response> 최저가_조합_브랜드_조회_요청() {
         return RestAssured.given().log().all()
-                .when().get("/api/v1/category/lowest-prices-brand")
+                .when().get("/api/v1/price-analysis/brands/lowest-prices")
+                .then().log().all()
+                .extract();
+    }
+
+    private ExtractableResponse<Response> 최저가_브랜드_조합_조회_요청() {
+        return RestAssured.given().log().all()
+                .when().get("/api/v1/price-analysis/brands/lowest-prices-combination")
                 .then().log().all()
                 .extract();
     }
@@ -70,7 +77,7 @@ public class CategoryAcceptanceTest {
     private ExtractableResponse<Response> 카테고리별_최고가_및_최저가_브랜드_조회_요청(String categoryName) {
         return RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/api/v1/category/" + categoryName + "/lowest-and-highest-prices-brand")
+                .when().get("/api/v1/price-analysis/" + categoryName + "/lowest-highest-prices")
                 .then().log().all()
                 .extract();
     }

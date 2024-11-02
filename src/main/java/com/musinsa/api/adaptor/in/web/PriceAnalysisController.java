@@ -1,6 +1,6 @@
 package com.musinsa.api.adaptor.in.web;
 
-import com.musinsa.api.adaptor.in.web.response.AllCategoryResponse;
+import com.musinsa.api.adaptor.in.web.response.LowestPricesOneBrandResponse;
 import com.musinsa.api.adaptor.in.web.response.CategoryResponse;
 import com.musinsa.api.application.port.in.LowestCategoryPricesUseCase;
 import lombok.RequiredArgsConstructor;
@@ -11,22 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/category")
+@RequestMapping("/api/v1/price-analysis")
 @RestController
-public class CategoryController {
+public class PriceAnalysisController {
 
     private final LowestCategoryPricesUseCase lowestCategoryPricesUseCase;
 
-    @GetMapping("/lowest-prices-brand")
-    public ResponseEntity lowestBrandPrices() {
+    @GetMapping("/brands/lowest-prices")
+    public ResponseEntity lowestPricesOneBrand() {
         var items = lowestCategoryPricesUseCase.findLowestPricesItemsByBrand();
-        var response = AllCategoryResponse.of(items);
+        var response = LowestPricesOneBrandResponse.of(items);
         return ResponseEntity
                 .ok()
                 .body(response);
     }
 
-    @GetMapping("/{categoryName}/lowest-and-highest-prices-brand")
+    @GetMapping("/brands/lowest-prices-combination")
+    public ResponseEntity lowestPricesBrandMix() {
+        var items = lowestCategoryPricesUseCase.findLowestPricesItemsByBrand();
+        var response = LowestPricesOneBrandResponse.of(items);
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
+    @GetMapping("/categories/{categoryName}/lowest-highest-prices")
     public ResponseEntity lowestAndHighestBrandPrices(@PathVariable String categoryName) {
         var response = CategoryResponse.toResponse(categoryName); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
         return ResponseEntity
