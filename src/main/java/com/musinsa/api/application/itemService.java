@@ -5,6 +5,8 @@ import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
 import com.musinsa.api.application.port.in.LowestCategoryPricesUseCase;
 import com.musinsa.api.application.port.out.ItemOutputPort;
+import com.musinsa.api.domain.Brand;
+import com.musinsa.api.domain.Category;
 import com.musinsa.api.domain.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,13 +35,16 @@ public class itemService implements
     }
 
     @Override
-    public List<Item> findLowestPricesItemsByBrand(Long brandId) {
-
+    public List<Item> findLowestPricesItemsByBrand() {
         // 브랜드 기준 상품을 다 가져옴
         // 카테고리 기준 그룹핑 -> 애초에 쿼리로 하면 편하긴 함
         // 카테고리별 최저 상품 하나씩만 남김, 카테고리 유형과 순서는 고정
 
-
-        return null;
+        Brand brand = Brand.builder().brandName("테스트").businessNumber("23").build();
+        return List.of(
+                Item.of(brand, Category.ACCESSORY, "10000"),
+                Item.of(brand, Category.BAG, "20000"),
+                Item.of(brand, Category.OUTER, "30000")
+        );
     }
 }

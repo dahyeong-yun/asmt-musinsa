@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("카테고리 상품 리스트 도메인 관련 기능")
 class CategoryItemsTest {
@@ -48,7 +47,7 @@ class CategoryItemsTest {
     @DisplayName("카테고리 최저가 상품 조회")
     void findLowestPriceItem() {
         Item lowestPriceItem = categoryItems.findLowestPriceItem();
-        assertThat(lowestPriceItem.getPrice().getPrice()).isEqualTo(BigDecimal.valueOf(80_000));
+        assertThat(lowestPriceItem.getItemPrice()).isEqualTo("80000");
     }
 
 
@@ -56,7 +55,7 @@ class CategoryItemsTest {
     @DisplayName("카테고리 최고가 상품 조회")
     void findHighestPriceItem() {
         Item highestPriceItem = categoryItems.findHighestPriceItem();
-        assertThat(highestPriceItem.getPrice().getPrice()).isEqualTo(BigDecimal.valueOf(100_000));
+        assertThat(highestPriceItem.getItemPrice()).isEqualTo("100000");
     }
 
     // e2e 테스트

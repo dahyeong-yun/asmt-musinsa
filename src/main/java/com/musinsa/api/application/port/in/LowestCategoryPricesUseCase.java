@@ -5,5 +5,5 @@ import com.musinsa.api.domain.Item;
 import java.util.List;
 
 public interface LowestCategoryPricesUseCase {
-    List<Item> findLowestPricesItemsByBrand(Long brandId);
+    List<Item> findLowestPricesItemsByBrand();
 }

@@ -1,49 +1,36 @@
 package com.musinsa.api.adaptor.in.web;
 
-import com.musinsa.api.adaptor.in.web.response.BrandPrice;
-import lombok.Builder;
+import com.musinsa.api.adaptor.in.web.response.AllCategoryResponse;
+import com.musinsa.api.adaptor.in.web.response.CategoryResponse;
+import com.musinsa.api.application.port.in.LowestCategoryPricesUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/category")
 @RestController
 public class CategoryController {
 
+    private final LowestCategoryPricesUseCase lowestCategoryPricesUseCase;
 
-    @GetMapping("/lowest-price")
-    public ResponseEntity retrieveAll() {
+    @GetMapping("/lowest-prices-brand")
+    public ResponseEntity lowestBrandPrices() {
+        var items = lowestCategoryPricesUseCase.findLowestPricesItemsByBrand();
+        var response = AllCategoryResponse.of(items);
         return ResponseEntity
                 .ok()
-                .body(CategoryResponse.builder()
-                        .categoryName("상의")
-                        .lowestPrice(List.of(BrandPrice.builder().brand("C").price("10,000").build()))
-                        .highestPrice(List.of(BrandPrice.builder().brand("I").price("11,400").build()))
-                        .build());
+                .body(response);
     }
 
-    @Builder
-    static class CategoryResponse {
-        private String categoryName;
-        private List<BrandPrice> lowestPrice;
-        private List<BrandPrice> highestPrice;
+    @GetMapping("/{categoryName}/lowest-and-highest-prices-brand")
+    public ResponseEntity lowestAndHighestBrandPrices(@PathVariable String categoryName) {
+        var response = CategoryResponse.toResponse(categoryName); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
+        return ResponseEntity
+                .ok()
+                .body(response);
     }
-
-    // 카테고리 이름으로 최저, 최고 가격 브랜드를 조회
-/*
-    {
-        "카테고리" : "상의",
-            "최저가" : [
-                   {"브랜드" : "C", "가격" : "10,000"}
-               ],
-            "최고가" : [
-                    {"브랜드" : "I", "가격" : "11,400"}
-             ]
-    }
-*/
 }

@@ -13,13 +13,13 @@ public class CategoryItems {
 
     public Item findLowestPriceItem() {
         return items.stream()
-                .min(Comparator.comparing(item -> item.getPrice().getPrice()))
+                .min(Comparator.comparing(Item::getItemPrice))
                 .orElseThrow();
     }
 
     public Item findHighestPriceItem() {
         return items.stream()
-                .max(Comparator.comparing(item -> item.getPrice().getPrice()))
+                .max(Comparator.comparing(Item::getItemPrice))
                 .orElseThrow();
     }
 }

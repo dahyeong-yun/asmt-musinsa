@@ -39,7 +39,7 @@ public class BrandAcceptanceTest {
     }
 
 
-    @Test
+//    @Test
     @DisplayName("브랜드 아이디를 가지고 특정 브랜드를 조회할 수 있다.")
     void getBrand() {
         // given

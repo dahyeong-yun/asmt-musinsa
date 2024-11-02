@@ -21,7 +21,6 @@ public class BrandController {
     private final BrandCreateUseCase brandCreateUseCase;
     private final BrandRetrieveUseCase brandRetrieveUseCase;
     private final BrandDeleteUseCase brandDeleteUseCase;
-    private final LowestCategoryPricesUseCase lowestCategoryPricesUseCase;
 
     @PostMapping
     public ResponseEntity create(@RequestBody BrandCreateRequest request, BindingResult bindingResult) {
@@ -61,15 +60,6 @@ public class BrandController {
 
     @PatchMapping("/{brandId}")
     public ResponseEntity modify(@PathVariable Long brandId) {
-        return ResponseEntity
-                .ok()
-                .build();
-    }
-
-// TODO 단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을 조회하는 API
-    @GetMapping("/{brandId}/lowest-category-prices")
-    public ResponseEntity retrieveCody(@PathVariable Long brandId) {
-        lowestCategoryPricesUseCase.findLowestPricesItemsByBrand(brandId);
         return ResponseEntity
                 .ok()
                 .build();
