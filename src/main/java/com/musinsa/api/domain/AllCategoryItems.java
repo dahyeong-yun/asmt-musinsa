@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.List;
 
+// TODO 명칭 수정 : 하나의 브랜드 기준 전체 카테고리 상품들
 @Getter
 public class AllCategoryItems {
 
@@ -16,7 +17,7 @@ public class AllCategoryItems {
     @Builder(access = AccessLevel.PRIVATE)
     private AllCategoryItems(Brand brand, List<Item> items) {
         this.brand = brand;
-        this.items = new Items();
+        this.items = Items.create();
         items.forEach(this.items::add);
     }
 

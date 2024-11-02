@@ -54,8 +54,31 @@ public class itemService implements
     }
 
     @Override
-    public AllCategoryItems findLowestPricesBrandMix() {
-        return null;
+    public Items findLowestPricesBrandMix() {
+        Items items = Items.create();
+
+        Brand adidas = Brand.builder().brandName("테스트").businessNumber("23").build();
+        Brand balenciaga = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand calvinKlein = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand dior = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand escada = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand fendi = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand gucci = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand hummel = Brand.builder().brandName("테스트").businessNumber("24").build();
+        Brand ironman = Brand.builder().brandName("테스트").businessNumber("24").build();
+
+        List<Item> findItems = List.of(
+                Item.of(calvinKlein, Category.TOP, "10000"),
+                Item.of(escada, Category.OUTER, "5000"),
+                Item.of(dior, Category.PANTS, "3000"),
+                Item.of(gucci, Category.SNEAKERS, "9000"),
+                Item.of(adidas, Category.BAG, "2000"),
+                Item.of(dior, Category.CAP, "1500"),
+                Item.of(ironman, Category.SOCKS, "1700"),
+                Item.of(fendi, Category.ACCESSORY, "1900")
+        );
+        findItems.forEach(items::add);
+        return items;
     }
 
     @Override

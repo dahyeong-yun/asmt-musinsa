@@ -1,7 +1,7 @@
 package com.musinsa.api.adaptor.in.web.response;
 
-import com.musinsa.api.domain.AllCategoryItems;
 import com.musinsa.api.domain.Item;
+import com.musinsa.api.domain.Items;
 import lombok.*;
 
 import java.util.List;
@@ -14,8 +14,8 @@ public class LowestPricesBrandMixResponse {
     private List<ItemResponse> categories;
     private String totalPrice;
 
-    public static LowestPricesBrandMixResponse of(AllCategoryItems allCategoryItems) {
-        List<Item> items = allCategoryItems.getItems().getItems();
+    public static LowestPricesBrandMixResponse of(Items allCategoryItems) {
+        List<Item> items = allCategoryItems.getItems();
         // items price 의 sum => totalPrice
         // items map => categories
         List<ItemResponse> categories =

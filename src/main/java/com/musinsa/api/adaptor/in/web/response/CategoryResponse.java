@@ -1,8 +1,10 @@
 package com.musinsa.api.adaptor.in.web.response;
 
 import com.musinsa.api.domain.CategoryItems;
-import com.musinsa.api.domain.Items;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
