@@ -20,7 +20,7 @@ public class Item {
     }
 
     public static Item of(Brand brand, Category category, String number) {
-        BigDecimal decimal = BigDecimal.valueOf(Double.valueOf(number));
+        BigDecimal decimal = BigDecimal.valueOf(Double.parseDouble(number));
         return Item.builder()
                 .brand(brand)
                 .category(category)

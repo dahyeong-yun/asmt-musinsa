@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 // TODO 명칭 수정 : 하나의 브랜드 기준 전체 카테고리 상품들
@@ -27,5 +28,13 @@ public class AllCategoryItems {
 
     public String getBrandName() {
         return brand.getBrandName();
+    }
+
+    public String getTotalPrice() {
+        BigDecimal totalPrice = items.getItems().stream()
+                .map(Item::getItemPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        ItemPrice itemsPrice = ItemPrice.create(totalPrice);
+        return itemsPrice.toFormattedString();
     }
 }

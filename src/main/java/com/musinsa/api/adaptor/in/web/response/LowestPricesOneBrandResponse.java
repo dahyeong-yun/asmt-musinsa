@@ -29,7 +29,7 @@ public class LowestPricesOneBrandResponse {
         return new LowestPricesOneBrandResponse(
                 allCategoryItems.getBrandName(),
                 categories,
-                "10000"
+                allCategoryItems.getTotalPrice()
         );
     }
 
