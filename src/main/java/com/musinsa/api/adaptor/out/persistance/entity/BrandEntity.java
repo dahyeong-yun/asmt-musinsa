@@ -16,14 +16,10 @@ public class BrandEntity {
     @Column(nullable = false)
     private String brandName;
 
-    @Column(nullable = false)
-    private String businessNumber;
-
     public static BrandEntity from(Brand brand) {
         BrandEntity entity = new BrandEntity();
         entity.id = brand.getId();
         entity.brandName = brand.getBrandName();
-        entity.businessNumber = brand.getBusinessNumber();
         return entity;
     }
 
@@ -31,7 +27,6 @@ public class BrandEntity {
         return Brand.builder()
                 .id(id)
                 .brandName(brandName)
-                .businessNumber(businessNumber)
                 .build();
     }
 }

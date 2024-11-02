@@ -26,7 +26,7 @@ public class BrandService implements
 
     @Override
     public Brand create(BrandCreateRequest request) {
-        Brand brand = Brand.create(request.getBrandName(), request.getBusinessNumber());
+        Brand brand = Brand.create(request.getBrandName());
         return brandOutputPort.save(brand);
     }
 

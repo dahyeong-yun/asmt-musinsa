@@ -41,7 +41,7 @@ public class BrandController {
     }
 
     @GetMapping("/{brandId}")
-    public ResponseEntity retrieve(@PathVariable Long brandId) {
+    public ResponseEntity retrieve(@PathVariable(name = "brandId") Long brandId) {
         Brand brand = brandRetrieveUseCase.retrieve(brandId);
         BrandRetrieveResponse brandRetrieveResponse = BrandRetrieveResponse.of(brand);
         return ResponseEntity
@@ -50,7 +50,7 @@ public class BrandController {
     }
 
     @DeleteMapping("/{brandId}")
-    public ResponseEntity delete(@PathVariable Long brandId) {
+    public ResponseEntity delete(@PathVariable(name = "brandId") Long brandId) {
         brandDeleteUseCase.delete(brandId);
         return ResponseEntity
                 .noContent()
@@ -58,7 +58,7 @@ public class BrandController {
     }
 
     @PatchMapping("/{brandId}")
-    public ResponseEntity modify(@PathVariable Long brandId) {
+    public ResponseEntity modify(@PathVariable(name = "brandId") Long brandId) {
         return ResponseEntity
                 .ok()
                 .build();

@@ -38,7 +38,7 @@ public class itemService implements
         // 카테고리 기준 그룹핑 -> 애초에 쿼리로 하면 편하긴 함
         // 카테고리별 최저 상품 하나씩만 남김, 카테고리 유형과 순서는 고정
 
-        Brand brand = Brand.builder().brandName("테스트").businessNumber("23").build();
+        Brand brand = Brand.builder().brandName("테스트").build();
         List<Item> items = List.of(
                 Item.of(brand, Category.TOP, "10000"),
                 Item.of(brand, Category.OUTER, "30000"),
@@ -55,14 +55,14 @@ public class itemService implements
 
     @Override
     public Items findLowestPricesBrandMix() {
-        Brand adidas = Brand.builder().brandName("A").businessNumber("23").build();
-        Brand calvinKlein = Brand.builder().brandName("C").businessNumber("24").build();
-        Brand dior = Brand.builder().brandName("D").businessNumber("24").build();
-        Brand escada = Brand.builder().brandName("E").businessNumber("24").build();
-        Brand fendi = Brand.builder().brandName("F").businessNumber("24").build();
-        Brand gucci = Brand.builder().brandName("G").businessNumber("24").build();
+        Brand adidas = Brand.builder().brandName("A").build();
+        Brand calvinKlein = Brand.builder().brandName("C").build();
+        Brand dior = Brand.builder().brandName("D").build();
+        Brand escada = Brand.builder().brandName("E").build();
+        Brand fendi = Brand.builder().brandName("F").build();
+        Brand gucci = Brand.builder().brandName("G").build();
 
-        Brand ironman = Brand.builder().brandName("I").businessNumber("24").build();
+        Brand ironman = Brand.builder().brandName("I").build();
 
         List<Item> findItems = List.of(
                 Item.of(calvinKlein, Category.TOP, "10000"),
@@ -81,8 +81,8 @@ public class itemService implements
     public CategoryItems findLowestAndHighestPricesAtCategory(String categoryName) {
         Category category = Category.fromString(categoryName);
 
-        Brand calvinKlein = Brand.builder().brandName("C").businessNumber("24").build();
-        Brand ironman = Brand.builder().brandName("I").businessNumber("24").build();
+        Brand calvinKlein = Brand.builder().brandName("C").build();
+        Brand ironman = Brand.builder().brandName("I").build();
 
 // TODO        itemOutputPort.findByCategory(category);
 

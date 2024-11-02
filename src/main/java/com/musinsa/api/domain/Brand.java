@@ -10,21 +10,17 @@ public class Brand {
     @Getter
     private String brandName;
 
-    @Getter
-    private String businessNumber;
 
     @Builder
-    private Brand(Long id, String brandName, String businessNumber) {
+    private Brand(Long id, String brandName) {
         this.id = id;
         this.brandName = brandName;
-        this.businessNumber = businessNumber;
     }
 
-    public static Brand create(String brandName, String businessNumber) {
+    public static Brand create(String brandName) {
         // TODO: Add validation
         return Brand.builder()
                 .brandName(brandName)
-                .businessNumber(businessNumber)
                 .build();
     }
 }

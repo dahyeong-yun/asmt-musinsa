@@ -7,18 +7,15 @@ import lombok.Getter;
 @Getter
 public class BrandRetrieveResponse {
     private final String brandName;
-    private final String businessNumber;
 
     @Builder
-    private BrandRetrieveResponse(String brandName, String businessNumber) {
+    private BrandRetrieveResponse(String brandName) {
         this.brandName = brandName;
-        this.businessNumber = businessNumber;
     }
 
     public static BrandRetrieveResponse of(Brand brand) {
         return BrandRetrieveResponse.builder()
                 .brandName(brand.getBrandName())
-                .businessNumber(brand.getBusinessNumber())
                 .build();
     }
 }

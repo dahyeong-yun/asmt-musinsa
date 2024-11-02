@@ -19,7 +19,7 @@ class ItemsTest {
         // 카테고리 상품 데이터 초기화
         items = Items.create();
 
-        Brand nike = Brand.create("나이키", "12123123");
+        Brand nike = Brand.create("나이키");
 
         items.add(
                 Item.create(nike,

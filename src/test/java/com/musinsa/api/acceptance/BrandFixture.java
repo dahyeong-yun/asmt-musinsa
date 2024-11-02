@@ -8,10 +8,9 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 
 public class BrandFixture {
-     static ExtractableResponse<Response> 브랜드_생성_요청(String brandName, String businessNumber) {
+     static ExtractableResponse<Response> 브랜드_생성_요청(String brandName) {
         HashMap<String, String> params = new HashMap<>();
         params.put("brandName", brandName);
-        params.put("businessNumber", businessNumber);
 
         return RestAssured.given().log().all()
                 .body(params)
