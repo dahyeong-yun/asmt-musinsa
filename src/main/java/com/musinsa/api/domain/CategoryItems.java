@@ -1,0 +1,25 @@
+package com.musinsa.api.domain;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class CategoryItems {
+    private List<Item> items = new ArrayList<>();
+
+    public void add(Item item) {
+        items.add(item);
+    }
+
+    public Item findLowestPriceItem() {
+        return items.stream()
+                .min(Comparator.comparing(item -> item.getPrice().getPrice()))
+                .orElseThrow();
+    }
+
+    public Item findHighestPriceItem() {
+        return items.stream()
+                .max(Comparator.comparing(item -> item.getPrice().getPrice()))
+                .orElseThrow();
+    }
+}
