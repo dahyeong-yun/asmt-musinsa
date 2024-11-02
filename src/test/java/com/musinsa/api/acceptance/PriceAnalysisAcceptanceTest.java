@@ -1,12 +1,12 @@
 package com.musinsa.api.acceptance;
 
+import com.musinsa.api.config.AbstractAcceptanceTest;
 import com.musinsa.api.domain.Category;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -15,10 +15,9 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 // 초기화 -> 테스트 격리
 @DisplayName("가격 조회 관련 기능")
-public class PriceAnalysisAcceptanceTest {
+public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
     /**
      * Given 브랜드가 1개 이상 등록되어 있고,

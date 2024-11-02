@@ -1,5 +1,6 @@
 package com.musinsa.api.acceptance;
 
+import com.musinsa.api.config.AbstractAcceptanceTest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("상품 관련 기능")
-public class ItemAcceptanceTest {
+public class ItemAcceptanceTest  extends AbstractAcceptanceTest {
 
     /**
      * Given 브랜드가 등록 되어 있고
@@ -23,7 +24,7 @@ public class ItemAcceptanceTest {
      */
     @Test
     @DisplayName("상품 가격과 브랜드, 카테고리를 가지고 상품을 등록할 수 있다.")
-    void createFavorite() {
+    void createItem() {
         // when
         ExtractableResponse<Response> 상품_생성_응답 = 상품_생성_요청();
 
@@ -36,7 +37,7 @@ public class ItemAcceptanceTest {
         return RestAssured.given().log().all()
                 .body(params)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().post("/api/v1/brand")
+                .when().post("/api/v1/items")
                 .then().log().all()
                 .extract();
     }

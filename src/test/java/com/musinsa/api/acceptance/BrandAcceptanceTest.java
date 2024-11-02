@@ -1,11 +1,11 @@
 package com.musinsa.api.acceptance;
 
+import com.musinsa.api.config.AbstractAcceptanceTest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -14,8 +14,7 @@ import java.util.HashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("브랜드 관련 기능")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class BrandAcceptanceTest {
+public class BrandAcceptanceTest extends AbstractAcceptanceTest {
 
     String brandCreateRequestName = "나이키";
     String brandCreateRequestBusinessNumber = "1234567890"; // TODO VO로 변경
