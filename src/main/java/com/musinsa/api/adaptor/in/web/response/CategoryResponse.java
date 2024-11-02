@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Builder
+@Getter
+@Builder(access = AccessLevel.PRIVATE)
 public class CategoryResponse {
     private String categoryName;
     private List<ItemResponse> lowestPrice;
     private List<ItemResponse> highestPrice;
 
     public static CategoryResponse toResponse(CategoryItems categoryItems) {
-
         return CategoryResponse.builder()
                 .categoryName(categoryItems.getCategoryName())
                 .lowestPrice(List.of(ItemResponse.builder().brandName("C").price("10,000").build()))

@@ -55,16 +55,13 @@ public class itemService implements
 
     @Override
     public Items findLowestPricesBrandMix() {
-        Items items = Items.create();
-
         Brand adidas = Brand.builder().brandName("A").businessNumber("23").build();
-        Brand balenciaga = Brand.builder().brandName("B").businessNumber("24").build();
         Brand calvinKlein = Brand.builder().brandName("C").businessNumber("24").build();
         Brand dior = Brand.builder().brandName("D").businessNumber("24").build();
         Brand escada = Brand.builder().brandName("E").businessNumber("24").build();
         Brand fendi = Brand.builder().brandName("F").businessNumber("24").build();
         Brand gucci = Brand.builder().brandName("G").businessNumber("24").build();
-        Brand hummel = Brand.builder().brandName("H").businessNumber("24").build();
+
         Brand ironman = Brand.builder().brandName("I").businessNumber("24").build();
 
         List<Item> findItems = List.of(
@@ -77,12 +74,29 @@ public class itemService implements
                 Item.of(ironman, Category.SOCKS, "1700"),
                 Item.of(fendi, Category.ACCESSORY, "1900")
         );
-        findItems.forEach(items::add);
-        return items;
+        return getItems(findItems);
     }
 
     @Override
     public CategoryItems findLowestAndHighestPricesAtCategory(String categoryName) {
-        return null;
+        Category category = Category.fromString(categoryName);
+
+        Brand calvinKlein = Brand.builder().brandName("C").businessNumber("24").build();
+        Brand ironman = Brand.builder().brandName("I").businessNumber("24").build();
+
+// TODO        itemOutputPort.findByCategory(category);
+
+        List<Item> findItems = List.of(
+                Item.of(calvinKlein, Category.TOP, "10000"),
+                Item.of(ironman, Category.OUTER, "11400")
+        );
+        Items items = getItems(findItems);
+        return CategoryItems.of(category, items);
+    }
+
+    private static Items getItems(List<Item> findItems) {
+        Items items = Items.create();
+        findItems.forEach(items::add);
+        return items;
     }
 }

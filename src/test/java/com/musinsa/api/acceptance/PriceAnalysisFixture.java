@@ -23,7 +23,7 @@ public class PriceAnalysisFixture {
     static ExtractableResponse<Response> 카테고리별_최고가_및_최저가_브랜드_조회_요청(String categoryName) {
         return RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/api/v1/price-analysis/" + categoryName + "/lowest-highest-prices")
+                .when().get("/api/v1/price-analysis/categories/" + categoryName + "/lowest-highest-prices")
                 .then().log().all()
                 .extract();
     }
