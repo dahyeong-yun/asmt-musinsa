@@ -22,5 +22,13 @@ public class CategoryItems {
         return category.getKorean();
     }
 
+    public Item getLowestPriceItem() {
+        return items.findLowestPriceItem();
+    }
+
+    public Item getHighestPriceItem() {
+        return items.findHighestPriceItem();
+    }
+
     // TODO getHighestPriceItem, getLowestPriceItem 메서드 추가
 }

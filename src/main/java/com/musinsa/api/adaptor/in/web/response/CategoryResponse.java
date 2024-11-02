@@ -1,6 +1,7 @@
 package com.musinsa.api.adaptor.in.web.response;
 
 import com.musinsa.api.domain.CategoryItems;
+import com.musinsa.api.domain.Item;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +16,14 @@ public class CategoryResponse {
     private List<ItemResponse> lowestPrice;
     private List<ItemResponse> highestPrice;
 
-    public static CategoryResponse toResponse(CategoryItems categoryItems) {
+    public static CategoryResponse of(CategoryItems categoryItems) {
+        Item lowestPriceItem = categoryItems.getLowestPriceItem();
+        Item higestPriceItem = categoryItems.getHighestPriceItem();
+
         return CategoryResponse.builder()
                 .categoryName(categoryItems.getCategoryName())
-                .lowestPrice(List.of(ItemResponse.builder().brandName("C").price("10,000").build()))
-                .highestPrice(List.of(ItemResponse.builder().brandName("I").price("11,400").build()))
+                .lowestPrice(List.of(ItemResponse.of(lowestPriceItem)))
+                .highestPrice(List.of(ItemResponse.of(higestPriceItem)))
                 .build();
     }
 
@@ -33,6 +37,13 @@ public class CategoryResponse {
         private ItemResponse(String brandName, String price) {
             this.brandName = brandName;
             this.price = price;
+        }
+
+        public static ItemResponse of(Item item) {
+            return ItemResponse.builder()
+                    .brandName(item.getItemBrandName())
+                    .price(item.getItemFormattedPrice())
+                    .build();
         }
     }
 }

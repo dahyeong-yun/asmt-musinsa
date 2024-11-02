@@ -40,7 +40,7 @@ public class PriceAnalysisController {
     @GetMapping("/categories/{categoryName}/lowest-highest-prices")
     public ResponseEntity lowestAndHighestBrandPrices(@PathVariable(name = "categoryName") String categoryName) {
         CategoryItems categoryItems = pricesRetrieveUseCase.findLowestAndHighestPricesAtCategory(categoryName);
-        var response = CategoryResponse.toResponse(categoryItems); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
+        var response = CategoryResponse.of(categoryItems); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
         return ResponseEntity
                 .ok()
                 .body(response);
