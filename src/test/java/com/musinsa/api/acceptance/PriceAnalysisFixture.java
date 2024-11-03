@@ -6,14 +6,14 @@ import io.restassured.response.Response;
 import org.springframework.http.MediaType;
 
 public class PriceAnalysisFixture {
-    static ExtractableResponse<Response> 최저가_조합_브랜드_조회_요청() {
+    static ExtractableResponse<Response> 최저가_조합_브랜드_상품_리스트_조회_요청() {
         return RestAssured.given().log().all()
                 .when().get("/api/v1/price-analysis/brands/lowest-prices")
                 .then().log().all()
                 .extract();
     }
 
-    static ExtractableResponse<Response> 최저가_브랜드_조합_조회_요청() {
+    static ExtractableResponse<Response> 카테고리별_최저가_상풍_리스트_조합_조회_요청() {
         return RestAssured.given().log().all()
                 .when().get("/api/v1/price-analysis/brands/lowest-prices-combination")
                 .then().log().all()

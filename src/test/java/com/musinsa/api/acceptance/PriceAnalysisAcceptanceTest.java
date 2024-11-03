@@ -21,11 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("가격 조회 관련 기능")
 public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
     private void 샘플_데이터_생성() {
         // 브랜드 생성
         ExtractableResponse<Response> 브랜드_A = 브랜드_생성_요청("A");
@@ -152,13 +147,13 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
         샘플_데이터_생성();
 
         // when
-        ExtractableResponse<Response> 최저가_조합_브랜드_조회_응답 = 최저가_조합_브랜드_조회_요청();
-        String brandName = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("brandName");
-        String totalPrice = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("totalPrice");
-        List<Map<String, String>> categories = 최저가_조합_브랜드_조회_응답.body().jsonPath().getList("categories");
+        ExtractableResponse<Response> 최저가_조합_브랜드_상품_리스트_조회_응답 = 최저가_조합_브랜드_상품_리스트_조회_요청();
+        String brandName = 최저가_조합_브랜드_상품_리스트_조회_응답.body().jsonPath().getString("brandName");
+        String totalPrice = 최저가_조합_브랜드_상품_리스트_조회_응답.body().jsonPath().getString("totalPrice");
+        List<Map<String, String>> categories = 최저가_조합_브랜드_상품_리스트_조회_응답.body().jsonPath().getList("categories");
 
         // then
-        assertThat(최저가_조합_브랜드_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(최저가_조합_브랜드_상품_리스트_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(brandName).isEqualTo("D");
         assertThat(totalPrice).isEqualTo("36,100");
 
@@ -179,19 +174,18 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
      * Then 조회할 수 있다.
      */
     @Test
-    @DisplayName("특정 카테고리의 최저가 및 최고가 상품을 조회할 수 있다.")
+    @DisplayName("각 카테고리 별 최저가 상품을 조회할 수 있다.")
     void findLowestPricesBrandMix() {
         // given
-        // TODO 브랜드 등록
-        // TODO 카테고리별 상품 등록
+        샘플_데이터_생성();
 
         // when
-        ExtractableResponse<Response> 최저가_조합_브랜드_조회_응답 = 최저가_브랜드_조합_조회_요청();
-        String totalPrice = 최저가_조합_브랜드_조회_응답.body().jsonPath().getString("totalPrice");
-        List<Map<String, String>> categories = 최저가_조합_브랜드_조회_응답.body().jsonPath().getList("categories");
+        ExtractableResponse<Response> 카테고리별_최저가_상풍_리스트_조합_조회_응답 = 카테고리별_최저가_상풍_리스트_조합_조회_요청();
+        String totalPrice = 카테고리별_최저가_상풍_리스트_조합_조회_응답.body().jsonPath().getString("totalPrice");
+        List<Map<String, String>> categories = 카테고리별_최저가_상풍_리스트_조합_조회_응답.body().jsonPath().getList("categories");
 
         // then
-        assertThat(최저가_조합_브랜드_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(카테고리별_최저가_상풍_리스트_조합_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(totalPrice).isEqualTo("34,100");
         assertThat(categories.get(0)).containsEntry("categoryName", Category.TOP.getKorean());
         assertThat(categories.get(1)).containsEntry("categoryName", Category.OUTER.getKorean());

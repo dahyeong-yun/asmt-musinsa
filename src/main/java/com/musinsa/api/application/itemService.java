@@ -72,6 +72,7 @@ public class itemService implements
                 Item.of(calvinKlein, Category.TOP, "10000"),
                 Item.of(ironman, Category.OUTER, "11400")
         );
+
         Items items = Items.create(findItems);
         return CategoryItems.of(category, items);
     }

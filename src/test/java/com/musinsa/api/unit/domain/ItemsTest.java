@@ -54,15 +54,10 @@ class ItemsTest {
         assertThat(lowestPriceItem.getItemPrice()).isEqualTo("80000");
     }
 
-
     @Test
     @DisplayName("카테고리 최고가 상품 조회")
     void findHighestPriceItem() {
         Item highestPriceItem = items.findHighestPriceItem();
         assertThat(highestPriceItem.getItemPrice()).isEqualTo("100000");
     }
-
-    // e2e 테스트
-    // 사용자는 카테고리 상품 중 최저가를 조회할 수 있다.
-    // 사용자는 카테고리 상품 중 최고가를 조회할 수 있다.
 }

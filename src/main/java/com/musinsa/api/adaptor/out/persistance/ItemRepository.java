@@ -3,7 +3,8 @@ package com.musinsa.api.adaptor.out.persistance;
 import com.musinsa.api.adaptor.out.persistance.entity.ItemEntity;
 import com.musinsa.api.adaptor.out.persistance.jpa.BrandJpaRepository;
 import com.musinsa.api.adaptor.out.persistance.jpa.ItemJpaRepository;
-import com.musinsa.api.adaptor.out.persistance.query.BrandLowestPriceResult;
+import com.musinsa.api.adaptor.out.persistance.projcetion.BrandLowestPriceResult;
+import com.musinsa.api.adaptor.out.persistance.projcetion.CategoryLowestPriceResult;
 import com.musinsa.api.application.port.out.BrandItemOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.Brand;
@@ -63,25 +64,9 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
 
     @Override
     public List<Item> findLowestPriceCategorySetAcrossBrands() {
-        Brand adidas = Brand.create("A");
-        Brand calvinKlein = Brand.create("C");
-        Brand dior = Brand.create("D");
-        Brand escada = Brand.create("E");
-        Brand fendi = Brand.create("F");
-        Brand gucci = Brand.create("G");
-
-        Brand ironman = Brand.create("I");
-
-        List<Item> findItems = List.of(
-                Item.of(calvinKlein, Category.TOP, "10000"),
-                Item.of(escada, Category.OUTER, "5000"),
-                Item.of(dior, Category.PANTS, "3000"),
-                Item.of(gucci, Category.SNEAKERS, "9000"),
-                Item.of(adidas, Category.BAG, "2000"),
-                Item.of(dior, Category.CAP, "1500"),
-                Item.of(ironman, Category.SOCKS, "1700"),
-                Item.of(fendi, Category.ACCESSORY, "1900")
-        );
-        return findItems;
+        List<CategoryLowestPriceResult> findItems = itemJpaRepository.findLowestPriceCategorySetAcrossBrands();
+        return findItems.stream()
+                .map(CategoryLowestPriceResult::toDomain)
+                .collect(Collectors.toList());
     }
 }

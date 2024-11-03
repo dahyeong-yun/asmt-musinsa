@@ -1,10 +1,9 @@
-package com.musinsa.api.adaptor.out.persistance.query;
+package com.musinsa.api.adaptor.out.persistance.projcetion;
 
 import com.musinsa.api.domain.Brand;
 import com.musinsa.api.domain.Category;
 import com.musinsa.api.domain.Item;
 import com.musinsa.api.domain.ItemPrice;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 
