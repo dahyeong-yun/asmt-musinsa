@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("브랜드 관련 기능")
 public class BrandAcceptanceTest extends AbstractAcceptanceTest {
-
     String brandCreateRequestName = "나이키";
 
     /**
@@ -113,7 +112,6 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
 //        // then
 //        assertThat(브랜드_삭제_응답.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 //    }
-
 
     /**
      * Given 브랜드가 생성되어 있고,

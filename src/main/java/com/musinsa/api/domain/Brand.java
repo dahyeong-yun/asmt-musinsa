@@ -1,17 +1,16 @@
 package com.musinsa.api.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
+@Getter
 public class Brand {
-    @Getter
-    private Long id;
+    private final Long id;
 
-    @Getter
     private String brandName;
 
-
-    @Builder
+    @Builder(access = AccessLevel.PRIVATE)
     private Brand(Long id, String brandName) {
         this.id = id;
         this.brandName = brandName;
@@ -22,5 +21,16 @@ public class Brand {
         return Brand.builder()
                 .brandName(brandName)
                 .build();
+    }
+
+    public static Brand mapFromEntity(Long id, String brandName) {
+        return Brand.builder()
+                .id(id)
+                .brandName(brandName)
+                .build();
+    }
+
+    public void updateBrandName(String brandName) {
+        this.brandName = brandName;
     }
 }

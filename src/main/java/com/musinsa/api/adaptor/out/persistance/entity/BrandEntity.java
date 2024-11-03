@@ -16,17 +16,17 @@ public class BrandEntity {
     @Column(nullable = false)
     private String brandName;
 
-    public static BrandEntity from(Brand brandCandi) {
+    public static BrandEntity from(Brand brandCandidate) {
         BrandEntity brandEntity = new BrandEntity();
-        brandEntity.id = brandCandi.getId();
-        brandEntity.brandName = brandCandi.getBrandName();
+        brandEntity.id = brandCandidate.getId();
+        brandEntity.brandName = brandCandidate.getBrandName();
         return brandEntity;
     }
 
     public Brand toDomain() {
-        return Brand.builder()
-                .id(id)
-                .brandName(brandName)
-                .build();
+        return Brand.mapFromEntity(
+                id,
+                brandName
+        );
     }
 }

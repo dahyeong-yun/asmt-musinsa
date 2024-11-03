@@ -43,12 +43,18 @@ public class itemService implements
     }
 
     @Override
+    public Item retrieve(Long itemId) {
+        return itemOutputPort.findById(itemId)
+                .orElseThrow(() -> new NoSearchResultException("Brand not found"));
+    }
+
+    @Override
     public AllCategoryItems findLowestPricesOneBrand() {
         // 브랜드 기준 상품을 다 가져옴
         // 카테고리 기준 그룹핑 -> 애초에 쿼리로 하면 편하긴 함
         // 카테고리별 최저 상품 하나씩만 남김, 카테고리 유형과 순서는 고정
 
-        Brand brand = Brand.builder().brandName("테스트").build();
+        Brand brand = Brand.create("테스트");
         List<Item> items = List.of(
                 Item.of(brand, Category.TOP, "10000"),
                 Item.of(brand, Category.OUTER, "30000"),
@@ -65,14 +71,14 @@ public class itemService implements
 
     @Override
     public Items findLowestPricesBrandMix() {
-        Brand adidas = Brand.builder().brandName("A").build();
-        Brand calvinKlein = Brand.builder().brandName("C").build();
-        Brand dior = Brand.builder().brandName("D").build();
-        Brand escada = Brand.builder().brandName("E").build();
-        Brand fendi = Brand.builder().brandName("F").build();
-        Brand gucci = Brand.builder().brandName("G").build();
+        Brand adidas = Brand.create("A");
+        Brand calvinKlein = Brand.create("C");
+        Brand dior = Brand.create("D");
+        Brand escada = Brand.create("E");
+        Brand fendi = Brand.create("F");
+        Brand gucci = Brand.create("G");
 
-        Brand ironman = Brand.builder().brandName("I").build();
+        Brand ironman = Brand.create("I");
 
         List<Item> findItems = List.of(
                 Item.of(calvinKlein, Category.TOP, "10000"),
@@ -91,8 +97,8 @@ public class itemService implements
     public CategoryItems findLowestAndHighestPricesAtCategory(String categoryName) {
         Category category = Category.fromString(categoryName);
 
-        Brand calvinKlein = Brand.builder().brandName("C").build();
-        Brand ironman = Brand.builder().brandName("I").build();
+        Brand calvinKlein = Brand.create("C");
+        Brand ironman = Brand.create("I");
 
 // TODO        itemOutputPort.findByCategory(category);
 
@@ -104,6 +110,7 @@ public class itemService implements
         return CategoryItems.of(category, items);
     }
 
+    // TODO 대체 및 삭제
     private static Items getItems(List<Item> findItems) {
         Items items = Items.create();
         findItems.forEach(items::add);

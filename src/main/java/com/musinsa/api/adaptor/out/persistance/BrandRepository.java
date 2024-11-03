@@ -16,7 +16,8 @@ public class BrandRepository implements BrandOutputPort {
 
     @Override
     public Brand save(Brand brand) {
-        BrandEntity brandEntity = brandJpaRepository.save(BrandEntity.from(brand));
+        BrandEntity brandCandidate = BrandEntity.from(brand);
+        BrandEntity brandEntity = brandJpaRepository.save(brandCandidate);
         return brandEntity.toDomain();
     }
 

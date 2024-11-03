@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ItemRetrieveUseCase {
     List<Item> retrieveAll();
+
+    Item retrieve(Long itemId);
 }
