@@ -53,4 +53,9 @@ public class BrandFixture {
                 .then().log().all()
                 .extract();
     }
+
+    static ExtractableResponse<Response> 브랜드_생성(String brandCreateRequestName) {
+        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성_요청(brandCreateRequestName);
+        return 브랜드_생성_응답;
+    }
 }

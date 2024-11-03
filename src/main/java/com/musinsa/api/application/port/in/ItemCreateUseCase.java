@@ -1,7 +1,7 @@
 package com.musinsa.api.application.port.in;
 
-import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
+import com.musinsa.api.domain.Item;
 
 public interface ItemCreateUseCase {
-    String create(ItemCreateRequest request);
+    Item create(ItemCreateCommand itemCreateCommand);
 }

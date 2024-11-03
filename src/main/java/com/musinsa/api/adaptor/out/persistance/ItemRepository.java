@@ -18,10 +18,17 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
     private final ItemJpaRepository itemJpaRepository;
 
     @Override
+    public Item save(Item item) {
+        ItemEntity itemCandidate = ItemEntity.from(item);
+        return itemJpaRepository.save(itemCandidate).toDomain();
+    }
+
+    @Override
     public Optional<List<Item>> findByBrandId(Long brandId) {
         List<ItemEntity> findItems = itemJpaRepository.findByBrandId(brandId);
         return Optional.of(findItems.stream()
                 .map(ItemEntity::toDomain)
                 .collect(Collectors.toList()));
     }
+
 }

@@ -1,9 +1,10 @@
 package com.musinsa.api.application;
 
-import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
+import com.musinsa.api.application.port.in.ItemCreateCommand;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
 import com.musinsa.api.application.port.in.PricesRetrieveUseCase;
+import com.musinsa.api.application.port.out.BrandOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.*;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,19 @@ public class itemService implements
         PricesRetrieveUseCase {
 
     private final ItemOutputPort itemOutputPort;
+    private final BrandOutputPort brandOutputPort;
 
     @Override
-    public String create(ItemCreateRequest request) {
-        return null;
+    public Item create(ItemCreateCommand itemCreateCommand) {
+        Brand brand = brandOutputPort.findById(itemCreateCommand.getBrandId())
+                .orElseThrow(/* TODO Custom Exception */);
+        Category category = Category.fromString(itemCreateCommand.getCategoryName());
+        Item itemCandidate = Item.create(
+                brand,
+                category,
+                ItemPrice.create(itemCreateCommand.getPrice())
+        );
+        return itemOutputPort.save(itemCandidate);
     }
 
     @Override

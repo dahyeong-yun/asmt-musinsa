@@ -3,9 +3,11 @@ package com.musinsa.api.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
+@Getter
 public class Item {
     private Long id;
     private Brand brand;

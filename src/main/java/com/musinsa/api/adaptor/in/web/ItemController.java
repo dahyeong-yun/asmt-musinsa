@@ -1,6 +1,7 @@
 package com.musinsa.api.adaptor.in.web;
 
 import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
+import com.musinsa.api.application.port.in.ItemCreateCommand;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,13 @@ public class ItemController {
     private final ItemCreateUseCase itemCreateUseCase;
 
     @PostMapping
-    public ResponseEntity create(ItemCreateRequest request) {
-        var itemId = itemCreateUseCase.create(request);
+    public ResponseEntity create(@RequestBody ItemCreateRequest request) {
+        var command = ItemCreateCommand.from(request);
+        var item = itemCreateUseCase.create(command);
+        // TODO domain to response
         return ResponseEntity
-                .created(URI.create("/api/v1/items/" + itemId))
-                .build();
+                .created(URI.create("/api/v1/items/" + item.getId()))
+                .body(item);
     }
 
     @GetMapping

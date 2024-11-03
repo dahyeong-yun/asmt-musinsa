@@ -24,7 +24,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     @DisplayName("브랜드 명과 사업자 번호를 가지고 브랜드를 등록할 수 있다.")
     void createBrand() {
         // when
-        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성();
+        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성(brandCreateRequestName);
 
         // then
         Long brandId = 브랜드_생성_응답.body().jsonPath().getLong("id");
@@ -42,7 +42,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     @DisplayName("브랜드 아이디를 가지고 특정 브랜드를 조회할 수 있다.")
     void retrieveBrand() {
         // given
-        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성();
+        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성(brandCreateRequestName);
         Long brandId = 브랜드_생성_응답.body().jsonPath().getLong("id");
 
         // when
@@ -64,7 +64,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     @DisplayName("브랜드 아이디를 가지고 브랜드를 삭제할 수 있다.")
     void deleteBrand() {
         // given
-        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성();
+        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성(brandCreateRequestName);
         Long brandId = 브랜드_생성_응답.body().jsonPath().getLong("id");
 
         // when
@@ -132,8 +132,4 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
      */
     //    @Test
 //    @DisplayName("브랜드 매핑 상품이 존재하는 경우 브랜드를 삭제할 수 없다.")
-    private ExtractableResponse<Response> 브랜드_생성() {
-        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성_요청(brandCreateRequestName);
-        return 브랜드_생성_응답;
-    }
 }

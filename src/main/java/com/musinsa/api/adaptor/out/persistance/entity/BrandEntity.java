@@ -16,11 +16,11 @@ public class BrandEntity {
     @Column(nullable = false)
     private String brandName;
 
-    public static BrandEntity from(Brand brand) {
-        BrandEntity entity = new BrandEntity();
-        entity.id = brand.getId();
-        entity.brandName = brand.getBrandName();
-        return entity;
+    public static BrandEntity from(Brand brandCandi) {
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.id = brandCandi.getId();
+        brandEntity.brandName = brandCandi.getBrandName();
+        return brandEntity;
     }
 
     public Brand toDomain() {

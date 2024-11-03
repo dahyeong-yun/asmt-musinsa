@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 
 import java.util.HashMap;
 
+import static com.musinsa.api.acceptance.BrandFixture.브랜드_생성;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("상품 관련 기능")
@@ -25,15 +26,23 @@ public class ItemAcceptanceTest  extends AbstractAcceptanceTest {
     @Test
     @DisplayName("상품 가격과 브랜드, 카테고리를 가지고 상품을 등록할 수 있다.")
     void createItem() {
+        // given
+        ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성("나이키");
+        Long brandId = 브랜드_생성_응답.body().jsonPath().getLong("id");
+
         // when
-        ExtractableResponse<Response> 상품_생성_응답 = 상품_생성_요청();
+        ExtractableResponse<Response> 상품_생성_응답 = 상품_생성_요청(brandId.toString(), "상의", "10000");
 
         // then
         assertThat(상품_생성_응답.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
 
-    private ExtractableResponse<Response> 상품_생성_요청() {
+    private ExtractableResponse<Response> 상품_생성_요청(String brandId, String categoryName, String price) {
         HashMap<String, String> params = new HashMap<>();
+        params.put("brandId", brandId);
+        params.put("categoryName", categoryName);
+        params.put("price", price);
+
         return RestAssured.given().log().all()
                 .body(params)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
