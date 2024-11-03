@@ -13,5 +13,7 @@ public interface ItemOutputPort {
     void deleteById(Long itemId);
 
     List<Item> findLowestPriceCategorySetPerBrand();
+
+    List<Item> findLowestPriceCategorySetAcrossBrands();
 }
 

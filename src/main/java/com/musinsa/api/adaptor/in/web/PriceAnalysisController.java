@@ -29,7 +29,7 @@ public class PriceAnalysisController {
 
     @GetMapping("/brands/lowest-prices-combination")
     public ResponseEntity lowestPricesBrandMix() {
-        var items = pricesRetrieveUseCase.findLowestPricesBrandMix();
+        var items = pricesRetrieveUseCase.findLowestPriceCategorySetAcrossBrands();
         var response = LowestPricesBrandMixResponse.of(items);
         return ResponseEntity
                 .ok()

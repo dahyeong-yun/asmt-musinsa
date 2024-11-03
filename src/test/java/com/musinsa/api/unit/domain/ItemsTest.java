@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,30 +19,32 @@ class ItemsTest {
     @BeforeEach
     void setUp() {
         // 카테고리 상품 데이터 초기화
-        items = Items.create();
+        List<Item> itemList = new ArrayList<>();
 
         Brand nike = Brand.create("나이키");
 
-        items.add(
+        itemList.add(
                 Item.create(nike,
                         Category.TOP,
                         ItemPrice.create(BigDecimal.valueOf(100_000))
                 )
         );
 
-        items.add(
+        itemList.add(
                 Item.create(nike,
                         Category.TOP,
                         ItemPrice.create(BigDecimal.valueOf(80_000))
                 )
         );
 
-        items.add(
+        itemList.add(
                 Item.create(nike,
                         Category.TOP,
                         ItemPrice.create(BigDecimal.valueOf(90_000))
                 )
         );
+
+        items = Items.create(itemList);
     }
 
     @Test

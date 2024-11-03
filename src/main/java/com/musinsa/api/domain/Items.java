@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class Items {
         items.add(item);
     }
 
-    public static Items create() {
-        return new Items(new ArrayList<>());
+    public static Items create(List<Item> items) {
+        return new Items(items);
     }
 
     public Item findLowestPriceItem() {

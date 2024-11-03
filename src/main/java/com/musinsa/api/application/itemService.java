@@ -37,6 +37,7 @@ public class itemService implements
 
     @Override
     public List<Item> retrieveAll() {
+        // TODO
         return null;
     }
 
@@ -48,36 +49,14 @@ public class itemService implements
 
     @Override
     public AllCategoryItems findLowestPriceCategorySetPerBrand() {
-        // 브랜드 기준 상품을 다 가져옴
-        // 카테고리 기준 그룹핑 -> 애초에 쿼리로 하면 편하긴 함
-        // 카테고리별 최저 상품 하나씩만 남김, 카테고리 유형과 순서는 고정
         List<Item> items = itemOutputPort.findLowestPriceCategorySetPerBrand();
         return AllCategoryItems.of(items.getFirst().getBrand(), items);
-        // TODO items 를 객체로 변경 하여 최저가를 구하는 로직을 포함 시키는 것이 좋을 것 같음
     }
 
     @Override
-    public Items findLowestPricesBrandMix() {
-        Brand adidas = Brand.create("A");
-        Brand calvinKlein = Brand.create("C");
-        Brand dior = Brand.create("D");
-        Brand escada = Brand.create("E");
-        Brand fendi = Brand.create("F");
-        Brand gucci = Brand.create("G");
-
-        Brand ironman = Brand.create("I");
-
-        List<Item> findItems = List.of(
-                Item.of(calvinKlein, Category.TOP, "10000"),
-                Item.of(escada, Category.OUTER, "5000"),
-                Item.of(dior, Category.PANTS, "3000"),
-                Item.of(gucci, Category.SNEAKERS, "9000"),
-                Item.of(adidas, Category.BAG, "2000"),
-                Item.of(dior, Category.CAP, "1500"),
-                Item.of(ironman, Category.SOCKS, "1700"),
-                Item.of(fendi, Category.ACCESSORY, "1900")
-        );
-        return getItems(findItems);
+    public Items findLowestPriceCategorySetAcrossBrands() {
+        List<Item> findItems = itemOutputPort.findLowestPriceCategorySetAcrossBrands();
+        return Items.create(findItems);
     }
 
     @Override
@@ -93,15 +72,8 @@ public class itemService implements
                 Item.of(calvinKlein, Category.TOP, "10000"),
                 Item.of(ironman, Category.OUTER, "11400")
         );
-        Items items = getItems(findItems);
+        Items items = Items.create(findItems);
         return CategoryItems.of(category, items);
-    }
-
-    // TODO 대체 및 삭제
-    private static Items getItems(List<Item> findItems) {
-        Items items = Items.create();
-        findItems.forEach(items::add);
-        return items;
     }
 
     @Override

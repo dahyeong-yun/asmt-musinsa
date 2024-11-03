@@ -17,8 +17,7 @@ public class AllCategoryItems {
     @Builder(access = AccessLevel.PRIVATE)
     private AllCategoryItems(Brand brand, List<Item> items) {
         this.brand = brand;
-        this.items = Items.create();
-        items.forEach(this.items::add);
+        this.items = Items.create(items);
     }
 
     public static AllCategoryItems of(Brand brand, List<Item> items) {
