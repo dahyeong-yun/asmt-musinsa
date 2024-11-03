@@ -24,13 +24,13 @@ public class itemService implements
 
     @Override
     public Item create(ItemCreateCommand itemCreateCommand) {
-        Brand brand = brandOutputPort.findById(itemCreateCommand.getBrandId())
+        Brand brand = brandOutputPort.findById(itemCreateCommand.brandId())
                 .orElseThrow(/* TODO Custom Exception */);
-        Category category = Category.fromString(itemCreateCommand.getCategoryName());
+        Category category = Category.fromString(itemCreateCommand.categoryName());
         Item itemCandidate = Item.create(
                 brand,
                 category,
-                ItemPrice.create(itemCreateCommand.getPrice())
+                ItemPrice.create(itemCreateCommand.price())
         );
         return itemOutputPort.save(itemCandidate);
     }

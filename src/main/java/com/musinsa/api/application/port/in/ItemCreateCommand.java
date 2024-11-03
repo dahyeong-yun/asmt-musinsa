@@ -3,21 +3,12 @@ package com.musinsa.api.application.port.in;
 import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Getter
-public class ItemCreateCommand {
-    private Long brandId;
-    private String categoryName;
-    private BigDecimal price;
-
+public record ItemCreateCommand(Long brandId, String categoryName, BigDecimal price) {
     @Builder(access = AccessLevel.PRIVATE)
-    public ItemCreateCommand(Long brandId, String categoryName, BigDecimal price) {
-        this.brandId = brandId;
-        this.categoryName = categoryName;
-        this.price = price;
+    public ItemCreateCommand {
     }
 
     public static ItemCreateCommand from(ItemCreateRequest request) {
