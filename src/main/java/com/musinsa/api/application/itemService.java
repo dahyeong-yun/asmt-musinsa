@@ -1,9 +1,6 @@
 package com.musinsa.api.application;
 
-import com.musinsa.api.application.port.in.ItemCreateCommand;
-import com.musinsa.api.application.port.in.ItemCreateUseCase;
-import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
-import com.musinsa.api.application.port.in.PricesRetrieveUseCase;
+import com.musinsa.api.application.port.in.*;
 import com.musinsa.api.application.port.out.BrandOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.*;
@@ -17,8 +14,9 @@ import java.util.List;
 @Transactional
 @Service
 public class itemService implements
-        ItemRetrieveUseCase,
         ItemCreateUseCase,
+        ItemRetrieveUseCase,
+        ItemDeleteUseCase,
         PricesRetrieveUseCase {
 
     private final ItemOutputPort itemOutputPort;
@@ -45,7 +43,7 @@ public class itemService implements
     @Override
     public Item retrieve(Long itemId) {
         return itemOutputPort.findById(itemId)
-                .orElseThrow(() -> new NoSearchResultException("Brand not found"));
+                .orElseThrow(() -> new NoSearchResultException("Item not found"));
     }
 
     @Override
@@ -115,5 +113,12 @@ public class itemService implements
         Items items = Items.create();
         findItems.forEach(items::add);
         return items;
+    }
+
+    @Override
+    public void delete(Long itemId) {
+        itemOutputPort.findById(itemId)
+                .orElseThrow(() -> new NoSearchResultException("Item not found"));
+        itemOutputPort.deleteById(itemId);
     }
 }

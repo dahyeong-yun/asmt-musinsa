@@ -45,4 +45,8 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public void deleteById(Long itemId) {
+        itemJpaRepository.deleteById(itemId);
+    }
 }

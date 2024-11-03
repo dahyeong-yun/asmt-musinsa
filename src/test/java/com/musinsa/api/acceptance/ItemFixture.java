@@ -30,5 +30,12 @@ public class ItemFixture {
                 .extract();
     }
 
+    static ExtractableResponse<Response> 상품_삭제_요청(Long itemId) {
+        return RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().delete("/api/v1/items/" + itemId)
+                .then().log().all()
+                .extract();
+    }
 
 }

@@ -4,6 +4,7 @@ import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
 import com.musinsa.api.adaptor.in.web.request.ItemRetrieveResponse;
 import com.musinsa.api.application.port.in.ItemCreateCommand;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
+import com.musinsa.api.application.port.in.ItemDeleteUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
 import com.musinsa.api.domain.Item;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.net.URI;
 public class ItemController {
     private final ItemRetrieveUseCase itemRetrieveUseCase;
     private final ItemCreateUseCase itemCreateUseCase;
+    private final ItemDeleteUseCase itemDeleteUseCase;
 
     @PostMapping
     public ResponseEntity create(@RequestBody ItemCreateRequest request) {
@@ -49,6 +51,7 @@ public class ItemController {
 
     @DeleteMapping("/{itemId}")
     public ResponseEntity delete(@PathVariable(name = "itemId")  Long itemId) {
+        itemDeleteUseCase.delete(itemId);
         return ResponseEntity
                 .noContent()
                 .build();

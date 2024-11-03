@@ -33,7 +33,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     /**
-     * Given 브랜드가 생성되어 있고,
+     * Given 브랜드가 등록되어 있고,
      * When 브랜드 아이디로 브랜드를 조회하면
      * Then 브랜드가 조회된다.
      */
@@ -55,7 +55,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     /**
-     * Given 브랜드가 생성되어 있고,
+     * Given 브랜드가 등록되어 있고,
      * When 브랜드 아이디로 브랜드를 삭제하면
      * Then 브랜드가 삭제된다.
      */
@@ -74,7 +74,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     /**
-     * Given 브랜드가 생성되어 있지 않고,
+     * Given 브랜드가 등록되어 있지 않고,
      * When 존재하지 않는 브랜드 아이디로 브랜드를 삭제하면
      * Then 브랜드가 삭제되지 않는다.
      */
@@ -92,7 +92,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     /**
-     * Given 브랜드가 생성되어 있고,
+     * Given 브랜드가 등록되어 있고,
      * When 브랜드 아이디로 브랜드를 삭제할 때
      * And 브랜드에 등록된 상품이 있으면
      * Then 브랜드 삭제에 실패한다.
@@ -114,7 +114,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
 //    }
 
     /**
-     * Given 브랜드가 생성되어 있고,
+     * Given 브랜드가 등록되어 있고,
      * When 브랜드 아이디와 변경할 브랜드 명을 가지고 브랜드를 수정하면
      * Then 브랜드 명이 변경된다.
      */
@@ -123,7 +123,7 @@ public class BrandAcceptanceTest extends AbstractAcceptanceTest {
 
 
     /**
-     * Given 브랜드가 생성되어 있고,
+     * Given 브랜드가 등록되어 있고,
      * When 브랜드 아이디와 변경할 브랜드 명을 가지고 브랜드를 수정할 때
      * And 브랜드 명이 중복되면
      * Then 브랜드 명이 변경되지 않는다.

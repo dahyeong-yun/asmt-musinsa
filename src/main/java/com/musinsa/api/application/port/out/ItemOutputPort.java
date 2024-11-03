@@ -8,5 +8,7 @@ public interface ItemOutputPort {
     Item save(Item item);
 
     Optional<Item> findById(Long itemId);
+
+    void deleteById(Long itemId);
 }
 
