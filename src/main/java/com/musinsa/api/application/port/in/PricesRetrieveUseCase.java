@@ -5,7 +5,7 @@ import com.musinsa.api.domain.CategoryItems;
 import com.musinsa.api.domain.Items;
 
 public interface PricesRetrieveUseCase {
-    AllCategoryItems findLowestPricesOneBrand();
+    AllCategoryItems findLowestPriceCategorySetPerBrand();
 
     Items findLowestPricesBrandMix();
 

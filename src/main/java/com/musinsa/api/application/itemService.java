@@ -47,23 +47,12 @@ public class itemService implements
     }
 
     @Override
-    public AllCategoryItems findLowestPricesOneBrand() {
+    public AllCategoryItems findLowestPriceCategorySetPerBrand() {
         // 브랜드 기준 상품을 다 가져옴
         // 카테고리 기준 그룹핑 -> 애초에 쿼리로 하면 편하긴 함
         // 카테고리별 최저 상품 하나씩만 남김, 카테고리 유형과 순서는 고정
-
-        Brand brand = Brand.create("테스트");
-        List<Item> items = List.of(
-                Item.of(brand, Category.TOP, "10000"),
-                Item.of(brand, Category.OUTER, "30000"),
-                Item.of(brand, Category.PANTS, "10000"),
-                Item.of(brand, Category.SNEAKERS, "10000"),
-                Item.of(brand, Category.BAG, "10000"),
-                Item.of(brand, Category.CAP, "10000"),
-                Item.of(brand, Category.SOCKS, "10000"),
-                Item.of(brand, Category.ACCESSORY, "20000")
-        );
-        return AllCategoryItems.of(brand, items);
+        List<Item> items = itemOutputPort.findLowestPriceCategorySetPerBrand();
+        return AllCategoryItems.of(items.getFirst().getBrand(), items);
         // TODO items 를 객체로 변경 하여 최저가를 구하는 로직을 포함 시키는 것이 좋을 것 같음
     }
 

@@ -14,19 +14,19 @@ public class BrandEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String brandName;
+    private String name;
 
     public static BrandEntity from(Brand brandCandidate) {
         BrandEntity brandEntity = new BrandEntity();
         brandEntity.id = brandCandidate.getId();
-        brandEntity.brandName = brandCandidate.getBrandName();
+        brandEntity.name = brandCandidate.getBrandName();
         return brandEntity;
     }
 
     public Brand toDomain() {
         return Brand.mapFromEntity(
                 id,
-                brandName
+                name
         );
     }
 }

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: asmt-musinsa
+
+  h2:
+    console:
+      enabled: true  # H2 ?? ???
+      path: /h2-console  # ?? ?? ??
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:musinsa
+    username: sa
+    password:
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql : true

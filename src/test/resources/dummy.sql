@@ -103,22 +103,23 @@ INSERT INTO item (brand_id, category, price) VALUES
 
 
 WITH
-CategoryMinPrices AS (
-    -- 각 브랜드의 카테고리별 최저가 상품 찾기 (최저가 상품의 ID도 함께)
+RankedItems AS (
+    -- 각 브랜드의 카테고리별로 최저가 상품을 하나만 선택 (동일 가격시 ID가 가장 작은 것)
     SELECT i.brand_id
          , i.category
-         , i.price    AS min_price
-         , i.id       AS item_id  -- 상품 ID 추가
-      FROM item i
-      JOIN (
-            SELECT brand_id
-                 , category
-                 , MIN(price) AS min_price
-              FROM item
-             GROUP BY brand_id, category
-           ) sub ON i.brand_id = sub.brand_id
-                AND i.category = sub.category
-                AND i.price = sub.min_price
+         , i.price
+         , i.id as item_id
+         , ROW_NUMBER() OVER (PARTITION BY i.brand_id, i.category ORDER BY i.price, i.id) AS rn
+    FROM item i
+),
+CategoryMinPrices AS (
+         -- 각 브랜드/카테고리별로 선택된 하나의 최저가 상품
+         SELECT brand_id
+              , category
+              , price AS min_price
+              , item_id
+         FROM RankedItems
+         WHERE rn = 1
 ),
 BrandTotals AS (
      -- 브랜드별 카테고리 최저가의 총합 계산
@@ -135,12 +136,9 @@ SELECT bt.brand_name
      , bt.total_price
      , cmp.category
      , cmp.min_price AS price
-     , cmp.item_id    -- 상품 ID 포함
+     , cmp.item_id
   FROM BrandTotals bt
   JOIN CategoryMinPrices cmp ON bt.brand_id = cmp.brand_id
  WHERE bt.total_price = (SELECT MIN(total_price)
                         FROM BrandTotals)
  ORDER BY cmp.category;
-
-
-

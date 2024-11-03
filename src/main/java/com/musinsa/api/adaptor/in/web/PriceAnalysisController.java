@@ -4,7 +4,6 @@ import com.musinsa.api.adaptor.in.web.response.LowestPricesBrandMixResponse;
 import com.musinsa.api.adaptor.in.web.response.LowestPricesOneBrandResponse;
 import com.musinsa.api.adaptor.in.web.response.CategoryResponse;
 import com.musinsa.api.application.port.in.PricesRetrieveUseCase;
-import com.musinsa.api.domain.CategoryItems;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class PriceAnalysisController {
 
     @GetMapping("/brands/lowest-prices")
     public ResponseEntity lowestPricesOneBrand() {
-        var items = pricesRetrieveUseCase.findLowestPricesOneBrand();
+        var items = pricesRetrieveUseCase.findLowestPriceCategorySetPerBrand();
         var response = LowestPricesOneBrandResponse.of(items);
         return ResponseEntity
                 .ok()
@@ -39,7 +38,7 @@ public class PriceAnalysisController {
 
     @GetMapping("/categories/{categoryName}/lowest-highest-prices")
     public ResponseEntity lowestAndHighestBrandPrices(@PathVariable(name = "categoryName") String categoryName) {
-        CategoryItems categoryItems = pricesRetrieveUseCase.findLowestAndHighestPricesAtCategory(categoryName);
+        var categoryItems = pricesRetrieveUseCase.findLowestAndHighestPricesAtCategory(categoryName);
         var response = CategoryResponse.of(categoryItems); // TODO usecase.findLowestAndHighestBrandPricesByCategory(categoryName);
         return ResponseEntity
                 .ok()

@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.Map;
 
+import static com.musinsa.api.acceptance.BrandFixture.브랜드_생성_요청;
+import static com.musinsa.api.acceptance.ItemFixture.상품_생성_요청;
 import static com.musinsa.api.acceptance.PriceAnalysisFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +23,120 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-// TODO
+
+    }
+
+    private void 샘플_데이터_생성() {
+        // 브랜드 생성
+        ExtractableResponse<Response> 브랜드_A = 브랜드_생성_요청("A");
+        ExtractableResponse<Response> 브랜드_B = 브랜드_생성_요청("B");
+        ExtractableResponse<Response> 브랜드_C = 브랜드_생성_요청("C");
+        ExtractableResponse<Response> 브랜드_D = 브랜드_생성_요청("D");
+        ExtractableResponse<Response> 브랜드_E = 브랜드_생성_요청("E");
+        ExtractableResponse<Response> 브랜드_F = 브랜드_생성_요청("F");
+        ExtractableResponse<Response> 브랜드_G = 브랜드_생성_요청("G");
+        ExtractableResponse<Response> 브랜드_H = 브랜드_생성_요청("H");
+        ExtractableResponse<Response> 브랜드_I = 브랜드_생성_요청("I");
+
+        String 브랜드_A_ID = 브랜드_A.body().jsonPath().getString("id");
+        String 브랜드_B_ID = 브랜드_B.body().jsonPath().getString("id");
+        String 브랜드_C_ID = 브랜드_C.body().jsonPath().getString("id");
+        String 브랜드_D_ID = 브랜드_D.body().jsonPath().getString("id");
+        String 브랜드_E_ID = 브랜드_E.body().jsonPath().getString("id");
+        String 브랜드_F_ID = 브랜드_F.body().jsonPath().getString("id");
+        String 브랜드_G_ID = 브랜드_G.body().jsonPath().getString("id");
+        String 브랜드_H_ID = 브랜드_H.body().jsonPath().getString("id");
+        String 브랜드_I_ID = 브랜드_I.body().jsonPath().getString("id");
+
+        // A 브랜드 상품 생성
+        상품_생성_요청(브랜드_A_ID, Category.TOP.getKorean(), "11200");
+        상품_생성_요청(브랜드_A_ID, Category.OUTER.getKorean(), "5500");
+        상품_생성_요청(브랜드_A_ID, Category.PANTS.getKorean(), "4200");
+        상품_생성_요청(브랜드_A_ID, Category.SNEAKERS.getKorean(), "9000");
+        상품_생성_요청(브랜드_A_ID, Category.BAG.getKorean(), "2000");
+        상품_생성_요청(브랜드_A_ID, Category.CAP.getKorean(), "1700");
+        상품_생성_요청(브랜드_A_ID, Category.SOCKS.getKorean(), "1800");
+        상품_생성_요청(브랜드_A_ID, Category.ACCESSORY.getKorean(), "2300");
+
+        // B 브랜드 상품 생성
+        상품_생성_요청(브랜드_B_ID, Category.TOP.getKorean(), "10500");
+        상품_생성_요청(브랜드_B_ID, Category.OUTER.getKorean(), "5900");
+        상품_생성_요청(브랜드_B_ID, Category.PANTS.getKorean(), "3800");
+        상품_생성_요청(브랜드_B_ID, Category.SNEAKERS.getKorean(), "9100");
+        상품_생성_요청(브랜드_B_ID, Category.BAG.getKorean(), "2100");
+        상품_생성_요청(브랜드_B_ID, Category.CAP.getKorean(), "2000");
+        상품_생성_요청(브랜드_B_ID, Category.SOCKS.getKorean(), "2000");
+        상품_생성_요청(브랜드_B_ID, Category.ACCESSORY.getKorean(), "2200");
+
+        // C 브랜드 상품 생성
+        상품_생성_요청(브랜드_C_ID, Category.TOP.getKorean(), "10000");
+        상품_생성_요청(브랜드_C_ID, Category.OUTER.getKorean(), "6200");
+        상품_생성_요청(브랜드_C_ID, Category.PANTS.getKorean(), "3300");
+        상품_생성_요청(브랜드_C_ID, Category.SNEAKERS.getKorean(), "9200");
+        상품_생성_요청(브랜드_C_ID, Category.BAG.getKorean(), "2200");
+        상품_생성_요청(브랜드_C_ID, Category.CAP.getKorean(), "1900");
+        상품_생성_요청(브랜드_C_ID, Category.SOCKS.getKorean(), "2200");
+        상품_생성_요청(브랜드_C_ID, Category.ACCESSORY.getKorean(), "2100");
+
+        // D 브랜드 상품 생성
+        상품_생성_요청(브랜드_D_ID, Category.TOP.getKorean(), "10100");
+        상품_생성_요청(브랜드_D_ID, Category.OUTER.getKorean(), "5100");
+        상품_생성_요청(브랜드_D_ID, Category.PANTS.getKorean(), "3000");
+        상품_생성_요청(브랜드_D_ID, Category.SNEAKERS.getKorean(), "9500");
+        상품_생성_요청(브랜드_D_ID, Category.BAG.getKorean(), "2500");
+        상품_생성_요청(브랜드_D_ID, Category.CAP.getKorean(), "1500");
+        상품_생성_요청(브랜드_D_ID, Category.SOCKS.getKorean(), "2400");
+        상품_생성_요청(브랜드_D_ID, Category.ACCESSORY.getKorean(), "2000");
+
+        // E 브랜드 상품 생성
+        상품_생성_요청(브랜드_E_ID, Category.TOP.getKorean(), "10700");
+        상품_생성_요청(브랜드_E_ID, Category.OUTER.getKorean(), "5000");
+        상품_생성_요청(브랜드_E_ID, Category.PANTS.getKorean(), "3800");
+        상품_생성_요청(브랜드_E_ID, Category.SNEAKERS.getKorean(), "9900");
+        상품_생성_요청(브랜드_E_ID, Category.BAG.getKorean(), "2300");
+        상품_생성_요청(브랜드_E_ID, Category.CAP.getKorean(), "1800");
+        상품_생성_요청(브랜드_E_ID, Category.SOCKS.getKorean(), "2100");
+        상품_생성_요청(브랜드_E_ID, Category.ACCESSORY.getKorean(), "2100");
+
+        // F 브랜드 상품 생성
+        상품_생성_요청(브랜드_F_ID, Category.TOP.getKorean(), "11200");
+        상품_생성_요청(브랜드_F_ID, Category.OUTER.getKorean(), "7200");
+        상품_생성_요청(브랜드_F_ID, Category.PANTS.getKorean(), "4000");
+        상품_생성_요청(브랜드_F_ID, Category.SNEAKERS.getKorean(), "9300");
+        상품_생성_요청(브랜드_F_ID, Category.BAG.getKorean(), "2100");
+        상품_생성_요청(브랜드_F_ID, Category.CAP.getKorean(), "1600");
+        상품_생성_요청(브랜드_F_ID, Category.SOCKS.getKorean(), "2300");
+        상품_생성_요청(브랜드_F_ID, Category.ACCESSORY.getKorean(), "1900");
+
+        // G 브랜드 상품 생성
+        상품_생성_요청(브랜드_G_ID, Category.TOP.getKorean(), "10500");
+        상품_생성_요청(브랜드_G_ID, Category.OUTER.getKorean(), "5800");
+        상품_생성_요청(브랜드_G_ID, Category.PANTS.getKorean(), "3900");
+        상품_생성_요청(브랜드_G_ID, Category.SNEAKERS.getKorean(), "9000");
+        상품_생성_요청(브랜드_G_ID, Category.BAG.getKorean(), "2200");
+        상품_생성_요청(브랜드_G_ID, Category.CAP.getKorean(), "1700");
+        상품_생성_요청(브랜드_G_ID, Category.SOCKS.getKorean(), "2100");
+        상품_생성_요청(브랜드_G_ID, Category.ACCESSORY.getKorean(), "2000");
+
+        // H 브랜드 상품 생성
+        상품_생성_요청(브랜드_H_ID, Category.TOP.getKorean(), "10800");
+        상품_생성_요청(브랜드_H_ID, Category.OUTER.getKorean(), "6300");
+        상품_생성_요청(브랜드_H_ID, Category.PANTS.getKorean(), "3100");
+        상품_생성_요청(브랜드_H_ID, Category.SNEAKERS.getKorean(), "9700");
+        상품_생성_요청(브랜드_H_ID, Category.BAG.getKorean(), "2100");
+        상품_생성_요청(브랜드_H_ID, Category.CAP.getKorean(), "1600");
+        상품_생성_요청(브랜드_H_ID, Category.SOCKS.getKorean(), "2000");
+        상품_생성_요청(브랜드_H_ID, Category.ACCESSORY.getKorean(), "2000");
+
+        // I 브랜드 상품 생성
+        상품_생성_요청(브랜드_I_ID, Category.TOP.getKorean(), "11400");
+        상품_생성_요청(브랜드_I_ID, Category.OUTER.getKorean(), "6700");
+        상품_생성_요청(브랜드_I_ID, Category.PANTS.getKorean(), "3200");
+        상품_생성_요청(브랜드_I_ID, Category.SNEAKERS.getKorean(), "9500");
+        상품_생성_요청(브랜드_I_ID, Category.BAG.getKorean(), "2400");
+        상품_생성_요청(브랜드_I_ID, Category.CAP.getKorean(), "1700");
+        상품_생성_요청(브랜드_I_ID, Category.SOCKS.getKorean(), "1700");
+        상품_생성_요청(브랜드_I_ID, Category.ACCESSORY.getKorean(), "2400");
     }
 
     /**
@@ -34,8 +149,7 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
     @DisplayName("단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가 상품의 카테고리 및 가격, 총액을 조회할 수 있다.")
     void findLowestBrandPrices() {
         // given
-        // TODO 브랜드 등록
-        // TODO 카테고리별 상품 등록
+        샘플_데이터_생성();
 
         // when
         ExtractableResponse<Response> 최저가_조합_브랜드_조회_응답 = 최저가_조합_브랜드_조회_요청();
@@ -45,8 +159,8 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
 
         // then
         assertThat(최저가_조합_브랜드_조회_응답.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(brandName).isEqualTo("테스트");
-        assertThat(totalPrice).isEqualTo("110,000");
+        assertThat(brandName).isEqualTo("D");
+        assertThat(totalPrice).isEqualTo("36,100");
 
         assertThat(categories.get(0)).containsEntry("categoryName", Category.TOP.getKorean());
         assertThat(categories.get(1)).containsEntry("categoryName", Category.OUTER.getKorean());

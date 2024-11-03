@@ -3,6 +3,7 @@ package com.musinsa.api.adaptor.out.persistance;
 import com.musinsa.api.adaptor.out.persistance.entity.ItemEntity;
 import com.musinsa.api.adaptor.out.persistance.jpa.BrandJpaRepository;
 import com.musinsa.api.adaptor.out.persistance.jpa.ItemJpaRepository;
+import com.musinsa.api.adaptor.out.persistance.query.BrandLowestPriceResult;
 import com.musinsa.api.application.port.out.BrandItemOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.Item;
@@ -28,6 +29,11 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
     }
 
     @Override
+    public void deleteById(Long itemId) {
+        itemJpaRepository.deleteById(itemId);
+    }
+
+    @Override
     public Optional<Item> findById(Long itemId) {
         return itemJpaRepository.findById(itemId)
                 .map(itemEntity -> itemEntity.toDomain(
@@ -46,7 +52,10 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
     }
 
     @Override
-    public void deleteById(Long itemId) {
-        itemJpaRepository.deleteById(itemId);
+    public List<Item> findLowestPriceCategorySetPerBrand() {
+        List<BrandLowestPriceResult> findItems = itemJpaRepository.findLowestPriceCategorySetPerBrand();
+        return findItems.stream()
+                .map(BrandLowestPriceResult::toDomain)
+                .collect(Collectors.toList());
     }
 }
