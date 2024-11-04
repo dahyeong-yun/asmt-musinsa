@@ -30,5 +30,4 @@ public class CategoryItems {
         return items.findHighestPriceItem();
     }
 
-    // TODO getHighestPriceItem, getLowestPriceItem 메서드 추가
 }

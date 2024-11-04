@@ -1,5 +1,6 @@
 package com.musinsa.api.application.port.out;
 
+import com.musinsa.api.domain.Category;
 import com.musinsa.api.domain.Item;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface ItemOutputPort {
     List<Item> findLowestPriceCategorySetPerBrand();
 
     List<Item> findLowestPriceCategorySetAcrossBrands();
+
+    List<Item> findPriceRangePerCategory(Category category);
 }
 

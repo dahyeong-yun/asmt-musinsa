@@ -224,6 +224,9 @@ public class PriceAnalysisAcceptanceTest extends AbstractAcceptanceTest {
     @Test
     @DisplayName("특정 카테고리의 최저가 및 최고가 상품을 조회할 수 있다.")
     void findLowestAndHighestBrandPrices() {
+        // given
+        샘플_데이터_생성();
+
         // when
         ExtractableResponse<Response> 카테고리별_최고가_및_최저가_브랜드_조회_응답 = 카테고리별_최고가_및_최저가_브랜드_조회_요청(Category.TOP.getKorean());
 

@@ -3,8 +3,10 @@ package com.musinsa.api.adaptor.out.persistance.jpa;
 import com.musinsa.api.adaptor.out.persistance.entity.ItemEntity;
 import com.musinsa.api.adaptor.out.persistance.projcetion.BrandLowestPriceResult;
 import com.musinsa.api.adaptor.out.persistance.projcetion.CategoryLowestPriceResult;
+import com.musinsa.api.adaptor.out.persistance.projcetion.CategoryPriceRangeResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -94,4 +96,48 @@ public interface ItemJpaRepository extends JpaRepository<ItemEntity, Long> {
             END
         """)
     List<CategoryLowestPriceResult> findLowestPriceCategorySetAcrossBrands();
+
+    @Query(nativeQuery = true, value = """
+    WITH RankedItems AS (
+        SELECT i.id as item_id
+             , i.brand_id
+             , b.name as brand_name
+             , i.category
+             , i.price
+             , ROW_NUMBER() OVER (
+                   PARTITION BY i.category 
+                   ORDER BY i.price
+               ) AS min_rn
+             , ROW_NUMBER() OVER (
+                   PARTITION BY i.category 
+                   ORDER BY i.price DESC
+               ) AS max_rn
+        FROM item i
+        JOIN brand b ON i.brand_id = b.id
+        WHERE i.category = :category
+    )
+    SELECT 
+        category,
+        brand_id as brandId,
+        brand_name as brandName,
+        price,
+        item_id as itemId,
+        'MIN' as priceType
+    FROM RankedItems
+    WHERE min_rn = 1
+    
+    UNION ALL
+    
+    SELECT 
+        category,
+        brand_id as brandId,
+        brand_name as brandName,
+        price,
+        item_id as itemId,
+        'MAX' as priceType
+    FROM RankedItems
+    WHERE max_rn = 1
+    ORDER BY priceType DESC  -- MIN이 먼저 나오도록 정렬
+    """)
+    List<CategoryPriceRangeResult> findPriceRangePerCategory(@Param("category") String category);
 }

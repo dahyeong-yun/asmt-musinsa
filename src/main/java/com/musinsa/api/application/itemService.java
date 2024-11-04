@@ -57,16 +57,7 @@ public class itemService implements
     @Override
     public CategoryItems findLowestAndHighestPricesAtCategory(String categoryName) {
         Category category = Category.fromString(categoryName);
-
-        Brand calvinKlein = Brand.create("C");
-        Brand ironman = Brand.create("I");
-
-// TODO        itemOutputPort.findByCategory(category);
-        List<Item> findItems = List.of(
-                Item.of(calvinKlein, Category.TOP, "10000"),
-                Item.of(ironman, Category.OUTER, "11400")
-        );
-
+        List<Item> findItems = itemOutputPort.findPriceRangePerCategory(category);
         Items items = Items.create(findItems);
         return CategoryItems.of(category, items);
     }

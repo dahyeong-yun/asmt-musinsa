@@ -5,9 +5,9 @@ import com.musinsa.api.adaptor.out.persistance.jpa.BrandJpaRepository;
 import com.musinsa.api.adaptor.out.persistance.jpa.ItemJpaRepository;
 import com.musinsa.api.adaptor.out.persistance.projcetion.BrandLowestPriceResult;
 import com.musinsa.api.adaptor.out.persistance.projcetion.CategoryLowestPriceResult;
+import com.musinsa.api.adaptor.out.persistance.projcetion.CategoryPriceRangeResult;
 import com.musinsa.api.application.port.out.BrandItemOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
-import com.musinsa.api.domain.Brand;
 import com.musinsa.api.domain.Category;
 import com.musinsa.api.domain.Item;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +67,14 @@ public class ItemRepository implements ItemOutputPort, BrandItemOutputPort {
         List<CategoryLowestPriceResult> findItems = itemJpaRepository.findLowestPriceCategorySetAcrossBrands();
         return findItems.stream()
                 .map(CategoryLowestPriceResult::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Item> findPriceRangePerCategory(Category category) {
+        List<CategoryPriceRangeResult> results = itemJpaRepository.findPriceRangePerCategory(category.name());
+        return results.stream()
+                .map(CategoryPriceRangeResult::toDomain)
                 .collect(Collectors.toList());
     }
 }
