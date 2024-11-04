@@ -46,11 +46,4 @@ public class ItemController {
                 .noContent()
                 .build();
     }
-
-    @PatchMapping("/{itemId}")
-    public ResponseEntity modify(@PathVariable(name = "itemId")  Long itemId) {
-        return ResponseEntity
-                .ok()
-                .build();
-    }
 }

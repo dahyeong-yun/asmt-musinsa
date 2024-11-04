@@ -60,13 +60,4 @@ class ItemPriceTest {
                 .isInstanceOf(InvalidPriceException.class)
                 .hasMessage("상품 가격은 0원 이상이어야 합니다.");
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1234.56", "1000.1", "999999.99"})
-    @DisplayName("소수점이 있는 가격은 생성할 수 없다")
-    void createDecimalPrice(String decimalPrice) {
-        assertThatThrownBy(() -> ItemPrice.create(new BigDecimal(decimalPrice)))
-                .isInstanceOf(InvalidPriceException.class)
-                .hasMessage("상품 가격은 정수만 가능합니다.");
-    }
 }

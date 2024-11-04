@@ -26,10 +26,10 @@ public class BrandController {
         // TODO request validation
         // TODO request to command
         Brand brand = brandCreateUseCase.create(request);
-        // TODO domain to response
+        var response = BrandRetrieveResponse.of(brand);
         return ResponseEntity
                 .created(URI.create("/api/v1/brand" + brand.getId()))
-                .body(brand);
+                .body(response);
     }
 
     @GetMapping("/{brandId}")
@@ -46,13 +46,6 @@ public class BrandController {
         brandDeleteUseCase.delete(brandId);
         return ResponseEntity
                 .noContent()
-                .build();
-    }
-
-    @PatchMapping("/{brandId}")
-    public ResponseEntity modify(@PathVariable(name = "brandId") Long brandId) {
-        return ResponseEntity
-                .ok()
                 .build();
     }
 }

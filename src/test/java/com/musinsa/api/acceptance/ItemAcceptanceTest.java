@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static com.musinsa.api.acceptance.BrandFixture.브랜드_삭제_요청;
 import static com.musinsa.api.acceptance.BrandFixture.브랜드_생성;
 import static com.musinsa.api.acceptance.ItemFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -98,8 +97,6 @@ public class ItemAcceptanceTest extends AbstractAcceptanceTest {
     }
 
 
-
-
     /**
      * Given 상품이 등록되어 있고,
      * When 상품 아이디와 변경할 상품 가격을 가지고 상품 가격을 수정하면
@@ -120,8 +117,6 @@ public class ItemAcceptanceTest extends AbstractAcceptanceTest {
      * Then 상품 가격이 변경된다.
      */
 // 동일 가격으로 수정 불가
-
-
     private static Long 상품_생성() {
         ExtractableResponse<Response> 브랜드_생성_응답 = 브랜드_생성("나이키");
         Long brandId = 브랜드_생성_응답.body().jsonPath().getLong("id");
