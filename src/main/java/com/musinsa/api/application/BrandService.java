@@ -35,11 +35,6 @@ public class BrandService implements
     }
 
     @Override
-    public List<Brand> retrieveAll() {
-        return null;
-    }
-
-    @Override
     public Brand retrieve(Long brandId) {
         return brandOutputPort.findById(brandId)
                 .orElseThrow(() -> new NoSearchResultException("Brand not found"));

@@ -20,14 +20,6 @@ public class BrandFixture {
                 .extract();
     }
 
-    static ExtractableResponse<Response> 브랜드_전체_조회_요청() {
-        return RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/api/v1/brand")
-                .then().log().all()
-                .extract();
-    }
-
     static ExtractableResponse<Response> 브랜드_조회_요청(Long brandId) {
         return RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)

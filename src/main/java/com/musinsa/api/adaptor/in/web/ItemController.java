@@ -31,15 +31,6 @@ public class ItemController {
                 .body(response);
     }
 
-    @GetMapping
-    public ResponseEntity retrieveAll() {
-        // TODO paging
-        var items = itemRetrieveUseCase.retrieveAll();
-        return ResponseEntity
-                .ok()
-                .body(items);
-    }
-
     @GetMapping("/{itemId}")
     public ResponseEntity retrieve(@PathVariable(name = "itemId") Long itemId) {
         var item = itemRetrieveUseCase.retrieve(itemId);

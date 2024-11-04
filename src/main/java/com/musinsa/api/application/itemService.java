@@ -36,12 +36,6 @@ public class itemService implements
     }
 
     @Override
-    public List<Item> retrieveAll() {
-        // TODO
-        return null;
-    }
-
-    @Override
     public Item retrieve(Long itemId) {
         return itemOutputPort.findById(itemId)
                 .orElseThrow(() -> new NoSearchResultException("Item not found"));
@@ -67,7 +61,6 @@ public class itemService implements
         Brand ironman = Brand.create("I");
 
 // TODO        itemOutputPort.findByCategory(category);
-
         List<Item> findItems = List.of(
                 Item.of(calvinKlein, Category.TOP, "10000"),
                 Item.of(ironman, Category.OUTER, "11400")

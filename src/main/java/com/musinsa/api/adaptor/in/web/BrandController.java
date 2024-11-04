@@ -32,15 +32,6 @@ public class BrandController {
                 .body(brand);
     }
 
-    @GetMapping
-    public ResponseEntity retrieveAll() {
-        // TODO paging
-        var brands = brandRetrieveUseCase.retrieveAll();
-        return ResponseEntity
-                .ok()
-                .body(brands);
-    }
-
     @GetMapping("/{brandId}")
     public ResponseEntity retrieve(@PathVariable(name = "brandId") Long brandId) {
         var brand = brandRetrieveUseCase.retrieve(brandId);
