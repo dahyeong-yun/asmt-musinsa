@@ -22,16 +22,6 @@ public class Item {
         this.price = price;
     }
 
-    // TODO 중복 삭제
-    public static Item of(Brand brand, Category category, String number) {
-        BigDecimal decimal = BigDecimal.valueOf(Double.parseDouble(number));
-        return Item.builder()
-                .brand(brand)
-                .category(category)
-                .price(ItemPrice.create(decimal))
-                .build();
-    }
-
     public static Item create(Brand brand, Category category, ItemPrice price) {
         return Item.builder()
                 .brand(brand)
@@ -64,6 +54,4 @@ public class Item {
     public BigDecimal getItemPrice() {
         return price.getPrice();
     }
-
-
 }
