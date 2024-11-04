@@ -1,7 +1,7 @@
 package com.musinsa.api.adaptor.in.web;
 
 import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
-import com.musinsa.api.adaptor.in.web.request.ItemRetrieveResponse;
+import com.musinsa.api.adaptor.in.web.response.ItemRetrieveResponse;
 import com.musinsa.api.application.port.in.command.ItemCreateCommand;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemDeleteUseCase;

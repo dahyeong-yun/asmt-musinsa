@@ -1,4 +1,4 @@
-package com.musinsa.api.adaptor.in.web.request;
+package com.musinsa.api.adaptor.in.web.response;
 
 import com.musinsa.api.domain.Item;
 import lombok.AccessLevel;
