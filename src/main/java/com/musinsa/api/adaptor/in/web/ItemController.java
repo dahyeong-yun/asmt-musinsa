@@ -2,11 +2,10 @@ package com.musinsa.api.adaptor.in.web;
 
 import com.musinsa.api.adaptor.in.web.request.ItemCreateRequest;
 import com.musinsa.api.adaptor.in.web.request.ItemRetrieveResponse;
-import com.musinsa.api.application.port.in.ItemCreateCommand;
+import com.musinsa.api.application.port.in.command.ItemCreateCommand;
 import com.musinsa.api.application.port.in.ItemCreateUseCase;
 import com.musinsa.api.application.port.in.ItemDeleteUseCase;
 import com.musinsa.api.application.port.in.ItemRetrieveUseCase;
-import com.musinsa.api.domain.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
 package com.musinsa.api.application;
 
 import com.musinsa.api.application.port.in.*;
+import com.musinsa.api.application.port.in.command.ItemCreateCommand;
 import com.musinsa.api.application.port.out.BrandOutputPort;
 import com.musinsa.api.application.port.out.ItemOutputPort;
 import com.musinsa.api.domain.*;
