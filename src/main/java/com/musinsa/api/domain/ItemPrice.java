@@ -14,8 +14,19 @@ public class ItemPrice {
 
     @Builder(access = AccessLevel.PRIVATE)
     private ItemPrice(BigDecimal price) {
-        // TODO 양수만 가능
+        validatePrice(price);
         this.price = price;
+    }
+
+    private void validatePrice(BigDecimal price) {
+        if (price != null) {
+            if (price.compareTo(BigDecimal.ZERO) < 0) {
+                throw new InvalidPriceException("상품 가격은 0원 이상이어야 합니다.");
+            }
+            if (price.scale() > 0) {
+                throw new InvalidPriceException("상품 가격은 정수만 가능합니다.");
+            }
+        }
     }
 
     public static ItemPrice create(BigDecimal price) {
